@@ -1,0 +1,1 @@
+Folder is needed to handle customers that use email body instead attachment.

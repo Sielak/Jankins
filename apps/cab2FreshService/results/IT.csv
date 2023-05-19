@@ -1,0 +1,2 @@
+Status,Date,Requested By,Approved By,HL Unit,Product,Prio,Est Dev (hrs),Est Cost (EUR),Decision,Decision date,Est Deliv Date,Feature ID,Description,Justification,RFC Link
+IN PROGRESS,2019-11-12,Marika Westrin,,HL Display AB - IT,INFRA,,,0.0,yes,2020-01-23,,INC-10002,G:\ Access,"For some reason , a lot of people had access on G-drive. SDL G-drive is fixed. Gliwice seems to be just as bad. Hugo have ticket",https://hldisplayab.freshservice.com/helpdesk/tickets/10002

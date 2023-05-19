@@ -1,0 +1,35 @@
+def choosed_agent = "BMA_TestRunner"
+//def choosed_agent = "BMA_poca"
+//def choosed_agent = "BMA_dawy"
+pipeline {
+    agent none
+    stages {
+		stage('Run_tests') {
+			parallel {
+                stage('Test first file') {
+                    agent {
+                        label "${choosed_agent}"
+                    }
+                    steps {
+                        bat 'cd C:/jenkins/integration_testing/pdf2jeeves/ & python test1.py'
+                    }
+                }
+                stage('Test second file') {
+                    agent {
+                        label "${choosed_agent}"
+                    }
+                    steps {
+                        bat 'cd C:/jenkins/integration_testing/pdf2jeeves/ & python test2.py'
+                    }
+                }
+            }
+		}
+	}
+	post {
+        always {
+			node("${choosed_agent}") {
+				echo "all test done"
+			}
+        }
+    }
+}

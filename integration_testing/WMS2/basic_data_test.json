@@ -1,0 +1,7 @@
+{
+    "database_name": "ErpTst005",
+    "db_server": "EW1-SQL-716",
+    "url_api_root": "http://bma-dev-704:8000",
+    "url_wso2": "http://bma-esb-703:8280/services/WMS_OnGoingWebHook_2_PythonAPI_UAT_1210",
+    "url_wso2_checker": "https://bma-esb-703:8243/services/WMS_OnGoingWebHook_2_PythonAPI/PROD/0000"
+}

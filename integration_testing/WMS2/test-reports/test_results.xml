@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<testsuite name="ESalesHealthCheckProd-20210924071005" tests="3" time="0.366" failures="0" errors="0">
+	<testcase classname="ESalesHealthCheckProd" name="test_01_check_wso2_webhook" time="0.021"/>
+	<testcase classname="ESalesHealthCheckProd" name="test_02_check_every_endpoint" time="0.204"/>
+	<testcase classname="ESalesHealthCheckProd" name="test_03_check_communication_between_wso2_and_fastAPI" time="0.141"/>
+	<system-out><![CDATA[Checking endpoints
+------------------
+http://bma-wms-101:8000/config
+http://bma-wms-101:8000/addArticle
+http://bma-wms-101:8000/addArticle_xml
+http://bma-wms-101:8000/addSalesOrder
+http://bma-wms-101:8000/addSalesOrder_xml
+http://bma-wms-101:8000/UploadOrderFile
+http://bma-wms-101:8000/addInOrder
+http://bma-wms-101:8000/addInOrder_xml
+http://bma-wms-101:8000/addProductionOrder
+http://bma-wms-101:8000/addProductionOrder_xml
+http://bma-wms-101:8000/addReturnOrder
+http://bma-wms-101:8000/addReturnOrder_xml
+http://bma-wms-101:8000/addCustomerOwnStockOrder
+http://bma-wms-101:8000/GetOrderByOrderNumber
+http://bma-wms-101:8000/GetInOrdersByQuery
+http://bma-wms-101:8000/GetInventoryChanges
+http://bma-wms-101:8000/GetInventoryItems
+http://bma-wms-101:8000/GetProductionOrdersByQuery
+http://bma-wms-101:8000/GetGoodsOperationOrdersByQuery
+]]></system-out>
+	<system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,2 @@
+Status,Date,Requested By,Approved By,HL Unit,Product,Prio,Est Dev (hrs),Est Cost (EUR),Decision,Decision date,Est Deliv Date,Feature ID,desc,justification
+IN PROGRESS,2019-07-04,Marika Westrin,dawy approve,HL Distribution Center,INFRA,5,2.0,100,yes,2020-10-22,2021-03-31,12343,"Current password policy =  8 characters, special character needed 90 days intervall  New suggestion = 16 characters, special characters needed, keep 90 days. (we have 1 year when MFA is implemented)",16 characters are impossible to hack... 8 characters are. 

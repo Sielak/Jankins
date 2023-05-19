@@ -1,0 +1,16 @@
+{
+    "data": [
+        {
+            "name": "highlight_data",
+            "api_url": "http://tools.hl-display.com/api/get_highlight_data",
+            "api_url_test": "http://bma-dev-704:8300/api/get_highlight_data",
+            "filepath": "C:/reports/highligh_data.csv"
+        },
+        {
+            "name": "pmo_data",
+            "api_url": "http://tools.hl-display.com/api/get_pmoReporting_data",
+            "api_url_test": "http://bma-dev-704:8300/api/get_pmoReporting_data",
+            "filepath": "C:/reports/get_pmoReporting_data.csv"
+        }
+    ]
+}

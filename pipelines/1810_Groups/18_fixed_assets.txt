@@ -1,0 +1,93 @@
+// folder, job and stage name must be one string !!!
+def job_hash = UUID.randomUUID().toString()
+// if you change agent you need also change runned job in RDP stage (schtasks)
+def choosed_agent = "BMA_TestRunner"
+//def choosed_agent = "BMA_poca"
+//def choosed_agent = "BMA_dawy"
+def run_folder = "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts"
+pipeline {
+    agent none
+    stages {
+		stage('Activate_poca_on_112') {
+			agent {
+				label "master"
+			}
+			steps {
+				echo "mock for activate poca on 112"
+				//bat 'schtasks /Run /TN "Jenkins rdp 112_poca"'
+				//sleep 10
+				//bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im mstsc.exe'
+			}
+			post {
+				success {
+					echo '112 was activated'
+				}
+				failure {
+					echo 'Problems with RDP connection'
+				}
+			}
+		}
+		stage('RDP') {
+			agent {
+				label "112_poca"
+			}
+			steps {
+				echo "mock for RDP"
+				//bat 'schtasks /Run /TN "Jenkins rdp BMA_MTE_poca"'
+				bat 'schtasks /Run /TN "Jenkins rdp BMA_MTE_TestRunner"'
+				sleep 30
+			}
+			post {
+				success {
+					echo 'RDP was runned'
+				}
+				failure {
+					echo 'Problems with RDP connection'
+				}
+			}
+		}
+		stage("PrepareEnv") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				bat "${run_folder}\\CFT\\1810\\Config\\windows_update.sikuli --args -hash ${job_hash}"
+            }
+        }
+		stage("PrepareJeeves") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				withEnv(['JENKINS_NODE_COOKIE=dontkillme']) {
+					bat "C:\\jenkins\\sikuli\\scripts\\system_OpenJeeves3\\test1.bat"
+					bat "${run_folder}\\system_login.sikuli"
+				    bat "${run_folder}\\system_ChangeCompany.sikuli --args 1810"
+                }
+            }
+        }
+		stage("18_fixed_assets") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock 18_fixed_assets"
+					bat "${run_folder}\\CFT\\1810\\18_fixed_assets\\3497.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\18_fixed_assets\\3498.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\18_fixed_assets\\3499.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+	}
+	post {
+        always {
+			node("${choosed_agent}") {
+				bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im Jvs32Client.exe'
+			}
+			node("112_poca") {  	
+				bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im mstsc.exe'
+			}
+        }
+    }
+}

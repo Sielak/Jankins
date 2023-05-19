@@ -1,0 +1,34 @@
+<style type="text/css">
+    .tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
+    .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;}
+    .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;}
+    .tg .tg-s6z2{text-align:center}
+    .tg .tg-yw4l{vertical-align:top}
+</style>
+<h3>Weekly project time report</h3>
+<table class="tg">
+    <tr>
+        <th class="tg-yw4l">Project</th>
+        <th class="tg-yw4l">Last Week worked internal</th>
+        <th class="tg-yw4l">Last Week worked BC</th>
+        <th class="tg-yw4l">Last Week worked external</th>
+        <th class="tg-yw4l">Total Used internal</th>
+        <th class="tg-yw4l">Total Used BC</th>
+        <th class="tg-yw4l">Total Used external</th>
+        <th class="tg-yw4l">Remaining</th>
+        <th class="tg-yw4l">Total Forecast</th>
+    </tr>
+{% for row in results %}
+    <tr>
+        <td class="tg-yw4l">{{row.project}}</td>
+        <td class="tg-yw4l">{{row.last_week_internal}}</td>
+        <td class="tg-yw4l">{{row.last_week_bc}}</td>
+        <td class="tg-yw4l">{{row.last_week_external}}</td>
+        <td class="tg-yw4l">{{row.duration_total_internal}}</td>
+        <td class="tg-yw4l">{{row.duration_total_bc}}</td>
+        <td class="tg-yw4l">{{row.duration_total_external}}</td>
+        <td class="tg-yw4l">{{row.remaining}}</td>
+        <td class="tg-yw4l">{{row.total_forecast}}</td>
+    </tr>
+{% endfor %}
+</table>

@@ -1,0 +1,48 @@
+<style type="text/css">
+    .tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
+    .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;}
+    .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;}
+    .tg .tg-s6z2{text-align:center}
+    .tg .tg-yw4l{vertical-align:top}
+    </style>
+    <p>Hi,</p>
+    <p>Another sprint is over, we would like to present what we have been working on for the last 2 weeks</p>
+    <p>Meeting starts this Friday at 9:00. Below is the link:</p>
+    <p class=MsoNormal><span style='mso-bookmark:_MailOriginal'></span><a
+href="https://teams.microsoft.com/l/meetup-join/19%3ameeting_NDI3YTVjZjUtY2E1Ni00Mjk3LWI5NmYtOTc1OGJkNWU4MTcw%40thread.v2/0?context=%7b%22Tid%22%3a%22e9c5ccf6-6da9-436e-adbe-811930bd0ec9%22%2c%22Oid%22%3a%22f9a23fd6-1b22-459c-8674-3a6fd9fb67af%22%7d"
+target="_blank"
+title="https://teams.microsoft.com/l/meetup-join/19%3ameeting_ndi3ytvjzjuty2e1ni00mjk3lwi5nmytotc1ogjknwu4mtcw%40thread.v2/0?context=%7b%22tid%22%3a%22e9c5ccf6-6da9-436e-adbe-811930bd0ec9%22%2c%22oid%22%3a%22f9a23fd6-1b22-459c-8674-3a6fd9fb67af%22%7d"><span
+style='mso-bookmark:_MailOriginal'><span style='font-size:13.5pt;font-family:
+"Segoe UI Semibold",sans-serif;color:#6264A7'>Join Microsoft Teams Meeting</span></span><span
+style='mso-bookmark:_MailOriginal'></span></a><span style='mso-bookmark:_MailOriginal'><span
+style='font-family:"Segoe UI",sans-serif;color:#252424'> <o:p></o:p></span></span></p>
+    <h2>How was the sprint?</h2>
+    <table class="tg">
+      <tr>
+        <th class="tg-yw4l">CBM Stream</th>
+        <th class="tg-yw4l">ID</th>
+        <th class="tg-yw4l">Name</th>
+      </tr>
+    {% for row in ficzery_sorted %}
+      <tr>
+        <td class="tg-yw4l">{{row.stream}}</td>
+        <td class="tg-yw4l">{{row.ID}}</td>
+        <td class="tg-yw4l">{{row.name}}</td>
+      </tr>
+    {% endfor %}
+    </table>
+    <h2>List of Defects</h2>
+    <table class="tg">
+      <tr>
+        <th class="tg-yw4l">CBM Stream</th>
+        <th class="tg-yw4l">ID</th>
+        <th class="tg-yw4l">Name</th>
+      </tr>
+    {% for row in defects_sorted %}
+      <tr>
+          <td class="tg-yw4l">{{row.stream}}</td>
+          <td class="tg-yw4l">{{row.ID}}</td>
+          <td class="tg-yw4l">{{row.name}}</td>
+      </tr>
+    {% endfor %}
+    </table>

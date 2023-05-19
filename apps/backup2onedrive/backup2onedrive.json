@@ -1,0 +1,39 @@
+{
+    "items2backup": [
+        {
+            "name": "sikuli",
+            "path": "C:/jenkins/sikuli/scripts/",
+            "ignore_pattern": "builds",
+            "is_file": false,
+            "interval": 7
+        },
+        {
+            "name": "jenkins_jobs",
+            "path": "C:/Program Files (x86)/Jenkins/jobs",
+            "ignore_pattern": "builds",
+            "is_file": false,
+            "interval": 7
+        },
+        {
+            "name": "dashboard_db",
+            "path": "C:/hl-dashboard/db.sqlite3",
+            "ignore_pattern": "",
+            "is_file": true,
+            "interval": 1
+        },
+        {
+            "name": "central_test_db",
+            "path": "C:/jenkins/central_test_database/central_test_database.db",
+            "ignore_pattern": "",
+            "is_file": true,
+            "interval": 1
+        },
+        {
+            "name": "App_portal_db",
+            "path": "C:/jenkins/apps/backup_uploadPortal_db/temp/db.sqlite3",
+            "ignore_pattern": "",
+            "is_file": true,
+            "interval": 1
+        }
+    ]
+}

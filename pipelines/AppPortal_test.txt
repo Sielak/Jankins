@@ -1,0 +1,46 @@
+pipeline {
+    agent {
+        label "BMA-DEV-704"
+    }
+    parameters {
+        string(name: 'BranchName', defaultValue: 'master', description: 'Select branch to pull from.')
+    }
+    stages {
+		stage('Build') {
+			steps {
+				sh "git clone --single-branch --branch ${params.BranchName} git@10.192.192.126:root/appportal.git /home/ubuntu/AppPortal"
+			}
+		}
+        stage('Install_requirements') {
+			steps {
+                sh '''
+                    . /home/ubuntu/virtual_environments/venv_AppPortal/bin/activate
+                    cd /home/ubuntu/AppPortal && pip install -r requirements.txt
+                '''
+			}
+		}
+        stage('Backup_db') {
+			steps {
+                sh 'cp /opt/AppPortal/db.sqlite3 /home/ubuntu/.config/AppPortal/db.sqlite3'
+			}
+		}
+        stage('Deploy') {
+			steps {
+                sh 'sudo rm -rf /opt/AppPortal/'
+                sh 'sudo mv /home/ubuntu/AppPortal /opt'
+                // move db back to project
+                sh 'mv /home/ubuntu/.config/AppPortal/db.sqlite3 /opt/AppPortal/db.sqlite3'  
+                //apply migrations on db
+                sh '''
+                    . /home/ubuntu/virtual_environments/venv_AppPortal/bin/activate
+                    cd /opt/AppPortal && python manage.py collectstatic --noinput
+                    cd /opt/AppPortal && python manage.py makemigrations
+                    cd /opt/AppPortal && python manage.py migrate
+                '''
+                sh 'ln -s /media/CrossDocking /opt/AppPortal/static/CrossDocking'
+                sh 'sudo service apache2 restart'
+                echo 'New version installed'
+			}
+		}
+    }
+}

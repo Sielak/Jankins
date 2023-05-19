@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<testsuite name="ESalesTest-20210924093006" tests="2" time="121.933" failures="0" errors="0">
+	<testcase classname="ESalesTest" name="test_01_prepare_data" time="1.734"/>
+	<testcase classname="ESalesTest" name="test_02_check_results" time="120.199"/>
+	<system-out><![CDATA[Update item data
+Update item balances
+Sleeping for 120 sek...
+Test resumed
+Fetch data from item
+Fetch data from PO
+]]></system-out>
+	<system-err><![CDATA[]]></system-err>
+</testsuite>

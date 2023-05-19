@@ -1,0 +1,20 @@
+{
+    "Jenkins_server": "http://bma-mte-101:8080",
+    "Jenkins_password": "Sznyrdyle1!",
+    "Jenkins_username": "ober",
+    "nodes": [
+        {
+            "name": "BMA-MTE-101_s-jeevestest",
+            "activation_job": "Utils/Activate_s_jeevestest" 
+        },
+        {
+            "name": "EW1-ADM-112",
+            "activation_job": "Utils/Activate poca on 112" 
+        },
+        {
+            "name": "BMA-MTE-101_poca",
+            "activation_job": "Utils/Activate_Poca" 
+        }
+        
+    ]
+}

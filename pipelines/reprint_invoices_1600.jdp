@@ -1,0 +1,75 @@
+// folder, job and stage name must be one string !!!
+def job_hash = UUID.randomUUID().toString()
+// if you change agent you need also change runned job in RDP stage (schtasks)
+def choosed_agent = "BMA_TestRunner"
+//def choosed_agent = "BMA_poca"
+//def choosed_agent = "BMA_dawy"
+def run_folder = "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts"
+pipeline {
+    agent none
+    stages {
+		stage('RDP') {
+			agent {
+				label "112_poca"
+			}
+			steps {
+				//echo "mock for RDP"
+				//bat 'schtasks /Run /TN "Jenkins rdp BMA_MTE_poca"'
+				bat 'schtasks /Run /TN "Jenkins rdp BMA_MTE_TestRunner"'
+				sleep 30
+			}
+			post {
+				success {
+					echo 'RDP was runned'
+				}
+				failure {
+					echo 'Problems with RDP connection'
+				}
+			}
+		}
+		stage("PrepareEnv") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				bat "${run_folder}\\CFT\\1810\\Config\\windows_update.sikuli --args -hash ${job_hash}"
+				//echo "mock for prepare env"
+            }
+        }
+		stage("PrepareJeeves") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				withEnv(['JENKINS_NODE_COOKIE=dontkillme']) {
+					bat "C:\\jenkins\\sikuli\\scripts\\system_OpenJeeves3\\prod.bat"
+					bat "${run_folder}\\system_login.sikuli --args prod"
+				    bat "${run_folder}\\system_ChangeCompany.sikuli --args 1600"
+                }
+				//echo "mock for prepare jeeves"
+            }
+        }
+		stage("ReprintInvoices") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock for reprintInvoices"
+					bat "${run_folder}\\Other\\reprint_invoices\\reprint_invoices_1600.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		
+	}
+	post {
+        always {
+			node("${choosed_agent}") {
+				bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im Jvs32Client.exe'
+			}
+			node("112_poca") {  	
+				bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im mstsc.exe'
+			}
+        }
+    }
+}

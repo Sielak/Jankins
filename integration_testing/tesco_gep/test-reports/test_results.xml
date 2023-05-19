@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<testsuite name="ESalesTest-20210924025006" tests="3" time="300.222" failures="0" errors="1">
+	<testcase classname="ESalesTest" name="test_01_prepare_data_in_Jeeves" time="0.074"/>
+	<testcase classname="ESalesTest" name="test_02_post_order_to_wso2" time="0.109"/>
+	<testcase classname="ESalesTest" name="test_03_check_result_in_jeeves" time="300.039">
+		<error type="AssertionError" message="False unexpectedly found in [False]"><![CDATA[Traceback (most recent call last):
+  File "tesco_gep_integration_test.py", line 54, in test_03_check_result_in_jeeves
+    self.assertNotIn(False, results)
+AssertionError: False unexpectedly found in [False]
+]]></error>
+	</testcase>
+	<system-out><![CDATA[customer_order_number 1632451806
+[DEBUG] <cXML_Response payloadID="637606965229903994.8ecfead7a4d246bd9e704258fb5d42f1@RD00155D676FA7." timestamp="2021-09-24T02:50:06.895+0000" xml:lang="en-US"><Response><Status code="200" text="OK"/></Response></cXML_Response>
+[DEBUG] customer order number: 1632451806
+order not found. Sleeping for 60 sek...
+order not found. Sleeping for 60 sek...
+order not found. Sleeping for 60 sek...
+order not found. Sleeping for 60 sek...
+order not found. Sleeping for 60 sek...
+order not found
+]]></system-out>
+	<system-err><![CDATA[]]></system-err>
+</testsuite>

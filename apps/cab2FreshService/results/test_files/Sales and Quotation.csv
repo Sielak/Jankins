@@ -1,0 +1,2 @@
+Status,Date,Requested By,Approved By,HL Unit,Product,Prio,Est Dev (hrs),Est Cost (EUR),Decision,Decision date,Est Deliv Date,Feature ID,Description,Justification
+SPECIFIED,2019-04-11,Asa Wigren,,HL Display Nordic,1J,4.0,8,480,YES,2020-10-03,,7908,Field for artwork needs to have more characters. Today it´s 30 but we would like to have 50. We also need to be sure that all text is visible on PO to supplier,We will then not need to rename artwork from customers and can use same artwork name as our customers. It will help us not to mix artworks and produce right content

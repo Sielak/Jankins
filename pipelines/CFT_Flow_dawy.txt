@@ -1,0 +1,272 @@
+// folder, job and stage name must be one string !!!
+def job_hash = UUID.randomUUID().toString()
+pipeline {
+    agent none
+    stages {
+		stage('Activate_poca_on_112') {
+			agent {
+				label "master"
+			}
+			steps {
+				echo "mock for activate poca on 112"
+				//bat 'schtasks /Run /TN "Jenkins rdp 112_poca"'
+				//sleep 10
+				//bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im mstsc.exe'
+			}
+			post {
+				success {
+					echo '112 was activated'
+				}
+				failure {
+					echo 'Problems with RDP connection'
+				}
+			}
+		}
+		stage('RDP_poca') {
+			agent {
+				label "112_poca"
+			}
+			steps {
+				echo "mock for RDP"
+				bat 'schtasks /Run /TN "Jenkins rdp BMA_MTE_dawy"'
+				sleep 10
+			}
+			post {
+				success {
+					echo 'RDP was runned'
+				}
+				failure {
+					echo 'Problems with RDP connection'
+				}
+			}
+		}
+		stage("PrepareJeeves") {
+			agent {
+				label "BMA_dawy"
+			}
+            steps {
+				withEnv(['JENKINS_NODE_COOKIE=dontkillme']) {
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_OpenJeeves.sikuli --args test1.lnk"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_login.sikuli"
+				    bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_ChangeCompany.sikuli --args 1810"
+                }
+				//echo "mock for prepare jeeves"
+            }
+        }
+		stage("ConfigTestUser") {
+			agent {
+				label "BMA_dawy"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\ConfigTestUser\\ihdl.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("02") {
+			agent {
+				label "BMA_dawy"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\02_create_item_calculate_and_update_pricelist\\3384.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\02_create_item_calculate_and_update_pricelist\\3384_1.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("05") {
+			agent {
+				label "BMA_dawy"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\05_order_processing\\3412.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\05_order_processing\\3419.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\05_order_processing\\3421.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("06") {
+			agent {
+				label "BMA_dawy"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\06_placement_purchase_order\\3422.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\06_placement_purchase_order\\3423.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\06_placement_purchase_order\\3424.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("09") {
+			agent {
+				label "BMA_dawy"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock for group 09"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\09_invoice\\3444.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\09_invoice\\3445.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("10") {
+			agent {
+				label "BMA_dawy"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock for group 10"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\10_advance_payment\\3447.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\10_advance_payment\\3450.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\10_advance_payment\\3451.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\10_advance_payment\\3453.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("12") {
+			agent {
+				label "BMA_dawy"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock for group 12"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\12_credit_invoicing\\3465.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("13") {
+			agent {
+				label "BMA_dawy"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock for group 13"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\13_incoming_payment_from_customer\\3466.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\13_incoming_payment_from_customer\\3467.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\13_incoming_payment_from_customer\\3468.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\13_incoming_payment_from_customer\\3469.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\13_incoming_payment_from_customer\\3470.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("15") {
+			agent {
+				label "BMA_dawy"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\15_supplier_invoice\\3473.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\15_supplier_invoice\\3474.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\15_supplier_invoice\\3475.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\15_supplier_invoice\\3476.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("16") {
+			agent {
+				label "BMA_dawy"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\16_outgoing_payment_journals\\3477.sikuli --args -hash ${job_hash}"
+                    bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\16_outgoing_payment_journals\\3477_1.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\16_outgoing_payment_journals\\3478.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\16_outgoing_payment_journals\\3479.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\16_outgoing_payment_journals\\3480.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\16_outgoing_payment_journals\\3481.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\16_outgoing_payment_journals\\3482.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\16_outgoing_payment_journals\\3483.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\16_outgoing_payment_journals\\3484.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\16_outgoing_payment_journals\\3485.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\16_outgoing_payment_journals\\3486.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\16_outgoing_payment_journals\\3487.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\16_outgoing_payment_journals\\3488.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\16_outgoing_payment_journals\\3489.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\16_outgoing_payment_journals\\3490.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\16_outgoing_payment_journals\\3491.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\16_outgoing_payment_journals\\3492.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\16_outgoing_payment_journals\\3493.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("17") {
+			agent {
+				label "BMA_dawy"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock 17_general_ledger"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\17_general_ledger\\3494.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\17_general_ledger\\3495.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\17_general_ledger\\3496.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\17_general_ledger\\3496_1.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("18") {
+			agent {
+				label "BMA_dawy"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock 18_fixed_assets"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\18_fixed_assets\\3497.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\18_fixed_assets\\3498.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\18_fixed_assets\\3499.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("19") {
+			agent {
+				label "BMA_dawy"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock 19_reports"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\19_reports\\3500.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\19_reports\\3501.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\19_reports\\3502.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\19_reports\\3503.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\19_reports\\3504.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\19_reports\\3505.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\19_reports\\3506.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\19_reports\\3507.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\19_reports\\3508.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\19_reports\\3509.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("20") {
+			agent {
+				label "BMA_dawy"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock 20_added_value"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\20_added_value\\3511.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\20_added_value\\3512.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\20_added_value\\3513.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\20_added_value\\3514.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\20_added_value\\3515.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\20_added_value\\3516.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\20_added_value\\3517.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\20_added_value\\3518.sikuli --args -hash ${job_hash}"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\20_added_value\\3519.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+	}
+	post {
+        always {
+			node("BMA_dawy") {
+				bat "cd C:\\jenkins\\central_test_database\\ & python results2db.py -group cft -func move -hash ${job_hash}"
+				bat "cd C:\\jenkins\\central_test_database\\ & python notification.py -template cft -hash ${job_hash}"
+				bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq dawy" /im Jvs32Client.exe'
+			}
+			node("112_poca") {  	
+				bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im mstsc.exe'
+			}
+        }
+    }
+}

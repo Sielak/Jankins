@@ -1,0 +1,1 @@
+Folder is needed for img files

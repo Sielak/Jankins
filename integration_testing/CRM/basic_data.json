@@ -1,0 +1,18 @@
+{
+    "crm_account_id": "",
+    "env_prod": "ErpTst005",
+    "env_test": "ErpTst005",
+    "financialgrpcode": "OTH70",
+    "foretagkod": "1810",
+    "ftgnamn": "CRM_test_company",
+    "ftgnr": "161650",
+    "ftgpostadr2": "CRM_test_street",
+    "ftgpostadr3": "CRM_test_city",
+    "ftgpostnr": "CRM_ZIP",
+    "hlarea_code": "EE",
+    "landskod": "PL",
+    "q_custsegmentcode": "79",
+    "salesmarket_code": "PL",
+    "saljare": "alko",
+    "supergrpcode": "OTHR"
+}

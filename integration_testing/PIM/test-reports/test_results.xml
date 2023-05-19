@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+<testsuite name="PIMTest-20210924080105" tests="2" time="777.271" failures="0" errors="2">
+	<testcase classname="PIMTest" name="test_01_jeeves2pim" time="161.774">
+		<error type="AssertionError" message="{'Nam[13 chars]t to PIM', 'Assortment': 'Other', 'Status': 'S[98 chars]008'} != {'Nam[13 chars]t to Jeeves', 'Assortment': 'BASE', 'Status': [112 chars] '1'}
+- {'Assortment': 'Other',
+?                 ^^^^^
+
++ {'Assortment': 'BASE',
+?                 ^^^^
+
+-  'Attribute': '1008',
+?                 ---
+
++  'Attribute': '1',
+-  'Function': 'Alarm',
++  'Function': 'Poster holder',
+-  'Name': 'Auto test to PIM',
+?                        ^^^
+
++  'Name': 'Auto test to Jeeves',
+?                        ^^^^^^
+
+-  'Owner': 'Lennart Johansson',
+-  'Status': 'Sellable',
++  'Owner': 'Agnieszka Czajczynska',
++  'Status': 'Pending',
+-  'Trademark': 'Next™'}
+?                ^^^^
+
++  'Trademark': 'iDisplay™'}
+?                ^^^^^^^^
+"><![CDATA[Traceback (most recent call last):
+  File "PIM_integration_test.py", line 40, in test_01_jeeves2pim
+    self.assertEqual(expected_results, product_data_in_pim)
+AssertionError: {'Nam[13 chars]t to PIM', 'Assortment': 'Other', 'Status': 'S[98 chars]008'} != {'Nam[13 chars]t to Jeeves', 'Assortment': 'BASE', 'Status': [112 chars] '1'}
+- {'Assortment': 'Other',
+?                 ^^^^^
+
++ {'Assortment': 'BASE',
+?                 ^^^^
+
+-  'Attribute': '1008',
+?                 ---
+
++  'Attribute': '1',
+-  'Function': 'Alarm',
++  'Function': 'Poster holder',
+-  'Name': 'Auto test to PIM',
+?                        ^^^
+
++  'Name': 'Auto test to Jeeves',
+?                        ^^^^^^
+
+-  'Owner': 'Lennart Johansson',
+-  'Status': 'Sellable',
++  'Owner': 'Agnieszka Czajczynska',
++  'Status': 'Pending',
+-  'Trademark': 'Next™'}
+?                ^^^^
+
++  'Trademark': 'iDisplay™'}
+?                ^^^^^^^^
+
+]]></error>
+	</testcase>
+	<testcase classname="PIMTest" name="test_02_pim2jeeves" time="615.497">
+		<error type="AssertionError" message="True != False"><![CDATA[Traceback (most recent call last):
+  File "PIM_integration_test.py", line 54, in test_02_pim2jeeves
+    self.assertEqual(True, record_posted)
+AssertionError: True != False
+]]></error>
+	</testcase>
+	<system-out><![CDATA[Product in PIM have name: #Auto test to Jeeves#
+Product name changed to: Auto test to Jeeves
+There is no row in dp data with todays date.
+There is no row in dp data with todays date.
+There is no row in dp data with todays date.
+There is no row in dp data with todays date.
+There is no row in dp data with todays date.
+There is no row in dp data with todays date.
+There is no row in dp data with todays date.
+There is no row in dp data with todays date.
+There is no row in dp data with todays date.
+There is no row in dp data with todays date.
+[INFO] Data in jeeves changed to original values
+Product name changed to: Auto test to Jeeves
+[INFO] Data in PIM changed to original values
+]]></system-out>
+	<system-err><![CDATA[]]></system-err>
+</testsuite>

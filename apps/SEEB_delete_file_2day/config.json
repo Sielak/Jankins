@@ -1,0 +1,17 @@
+    {
+        "Nomentia": {
+                "host": "sftp-trezone.analyste-saas.com",
+                "username": "hldisplay",
+                "password": ")D%S_4ZE_6Uwb|B"
+        },
+        "SEB": {
+            "host": "sftp.hl-display.com",
+            "username": "SEB_SFTP",
+            "password": "CKdz@Ut28K@e%"
+        },
+        "application_dir": "C:/Program Files (x86)/GnuPG/bin/gpg.exe",
+        "pathtemp": "c:/SEEB_enc_integration/",
+        "passphraseSEB": "sebprod01",
+        "passphraseHL": "hl-display"
+    }
+    

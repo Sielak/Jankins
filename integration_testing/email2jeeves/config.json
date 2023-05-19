@@ -1,0 +1,140 @@
+{
+  "integration_url": "http://bma-app-701:8200",
+  "customers": [
+    {
+      "name": "SystemU",
+      "foretagkod": 1600,
+      "email_domain": "hl-display.com_systemu",
+      "sales_team_email": "dawid.wybierek@hl-display.com",
+      "financial_group": "SYSU",
+      "use_customer_item_numbers": false,
+      "multiply_qty_by_kuargeneration": false,
+      "file_extensions": [
+        "csv"
+      ],
+      "sales_type": 19,
+      "ExternalOrderType": 2,
+      "order_status": 10
+    },
+    {
+      "name": "ICA",
+      "foretagkod": 1210,
+      "email_domain": "hl-display.com_ica",
+      "sales_team_email": "dawid.wybierek@hl-display.com",
+      "financial_group": "ICA",
+      "use_customer_item_numbers": false,
+      "multiply_qty_by_kuargeneration": false,
+      "file_extensions": [
+        "pdf"
+      ],
+      "sales_type": 19,
+      "ExternalOrderType": 2,
+      "order_status": 10
+    },
+    {
+      "name": "Ariba",
+      "foretagkod": 0,
+      "email_domain": "hl-display.com_ariba",
+      "sales_team_email": "dawid.wybierek@hl-display.com",
+      "financial_group": null,
+      "use_customer_item_numbers": false,
+      "multiply_qty_by_kuargeneration": false,
+      "file_extensions": [
+        "xml"
+      ],
+      "sales_type": 19,
+      "ExternalOrderType": 2,
+      "order_status": 0
+    },
+    {
+      "name": "Auchan",
+      "foretagkod": 1810,
+      "email_domain": "",
+      "sales_team_email": "dawid.wybierek@hl-display.com",
+      "financial_group": "AUCH",
+      "use_customer_item_numbers": false,
+      "multiply_qty_by_kuargeneration": false,
+      "file_extensions": [
+        "xml"
+      ],
+      "sales_type": 19,
+      "ExternalOrderType": 2,
+      "order_status": 0
+    },
+    {
+      "name": "Carrefour",
+      "foretagkod": 1810,
+      "email_domain": "hl-display.com_carrefour",
+      "sales_team_email": "dawid.wybierek@hl-display.com",
+      "financial_group": "CARRE",
+      "use_customer_item_numbers": true,
+      "multiply_qty_by_kuargeneration": false,
+      "file_extensions": [
+        "csv"
+      ],
+      "sales_type": 19,
+      "ExternalOrderType": 2,
+      "order_status": 0
+    },
+    {
+      "name": "SGruppen",
+      "foretagkod": 1210,
+      "email_domain": "hl-display.com_sgruppen",
+      "sales_team_email": "dawid.wybierek@hl-display.com",
+      "financial_group": "SOK",
+      "use_customer_item_numbers": false,
+      "multiply_qty_by_kuargeneration": true,
+      "file_extensions": [
+        "html"
+      ],
+      "sales_type": 19,
+      "ExternalOrderType": 2,
+      "order_status": 10
+    },
+    {
+      "name": "Rewe",
+      "foretagkod": 1810,
+      "email_domain": "hl-display.com_rewe",
+      "sales_team_email": "dawid.wybierek@hl-display.com",
+      "financial_group": "REWE",
+      "use_customer_item_numbers": false,
+      "multiply_qty_by_kuargeneration": true,
+      "file_extensions": [
+        "body"
+      ],
+      "sales_type": 19,
+      "ExternalOrderType": 2,
+      "order_status": 10
+    },
+    {
+      "name": "Lidl",
+      "foretagkod": 1810,
+      "email_domain": "hl-display.com_lidl",
+      "sales_team_email": "dawid.wybierek@hl-display.com",
+      "financial_group": "SCHGR",
+      "use_customer_item_numbers": false,
+      "multiply_qty_by_kuargeneration": false,
+      "file_extensions": [
+        "xml"
+      ],
+      "sales_type": 19,
+      "ExternalOrderType": 2,
+      "order_status": 0
+    },
+    {
+      "name": "Willys",
+      "foretagkod": 1210,
+      "email_domain": "hl-display.com_willys",
+      "sales_team_email": "dawid.wybierek@hl-display.com",
+      "financial_group": "AXFOD",
+      "use_customer_item_numbers": false,
+      "multiply_qty_by_kuargeneration": false,
+      "file_extensions": [
+        "pdf"
+      ],
+      "sales_type": 19,
+      "ExternalOrderType": 2,
+      "order_status": 10
+    }
+  ]
+}
