@@ -1,9 +1,0 @@
-{
-    "Axosoft_password": "Anubis1!",
-    "Axosoft_username": "dashboard",
-    "client_id": "30e900dc-ce6b-4bf2-958a-a044e8a1dc91",
-    "client_secret": "629e4699-3ab9-446d-906e-c7d47de3cbdc",
-    "path2db": "C:\\jenkins2html_django\\it_dashboard\\db.sqlite3",
-    "date_for_calculating_Sprint_start": "02/03/2020",
-    "date_for_calculating_Sprint_end": "28/02/2020"
-}

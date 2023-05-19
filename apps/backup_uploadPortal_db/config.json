@@ -1,7 +1,0 @@
-{
-    "host": "bma-app-101",
-    "username": "ubuntu",
-    "ssh_key": "C:/jenkins/backup/HLdevs_rsa_open.pub",
-    "remote_path": "/opt/AppPortal/db.sqlite3",
-    "local_path": "C:/jenkins/apps/backup_uploadPortal_db/temp/db.sqlite3"
-}
