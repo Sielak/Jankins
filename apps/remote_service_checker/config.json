@@ -1,0 +1,25 @@
+{
+    "services2check": [
+        {
+            "server": "\\\\10.192.194.24",
+            "login": "administrator",
+            "password": "butte-RQRT3N",
+            "service_name": "Gung.io - SB2 - 1600 - FR",
+            "list": false
+        },
+        {
+            "server": "\\\\10.192.194.24",
+            "login": "administrator",
+            "password": "butte-RQRT3N",
+            "service_name": "mongodb",
+            "list": false
+        },
+        {
+            "server": "\\\\10.192.194.24",
+            "login": "administrator",
+            "password": "butte-RQRT3N",
+            "service_name": "nginx",
+            "list": false
+        }
+    ]
+}

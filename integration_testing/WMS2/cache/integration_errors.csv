@@ -1,0 +1,15 @@
+ProcesId,ProcesType,Text1,Text2,Message,RowCreationDate
+24da9898-1c3e-11ec-a25d-9571e2c6df07,GetOrderByOrderNumber,1600,,"<%OrderNr> = 194706, 
+Failed picking goods in Jeeves for SO row 10:  {999:1163} Product account does not allow negative inventory balances
+Item No.=735952
+Inventory location=0
+Batch No.= 
+Bin=SD79A
+Item serial No.= 
+Project ID= 
+Product account=HLPROD
+Inventory balance=-31
+Own company ID=1600
+
+",2021-09-23 07:16:17.163000
+35ef8c46-1c6e-11ec-a25d-9571e2c6df07,GetInventoryChanges,1600,,"Failed saving XINVJ transactions: Failed inserting item 384957 transaction 3208: Cannot insert the value NULL into column 'LagPlats', table 'ErpJvs001.dbo.invh'; column does not allow nulls. INSERT fails.",2021-09-23 13:00:21.690000

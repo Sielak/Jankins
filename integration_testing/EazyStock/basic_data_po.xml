@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <Recommended_orders>
+            <Supplier>
+                <WarehouseCode>1600</WarehouseCode>
+                <SupplierCode>1190</SupplierCode>
+                <BuyerCode>dawy</BuyerCode>
+                <ConfirmedBy>dawid.wybierek@hl-display.com</ConfirmedBy>
+            </Supplier>
+            <OrderRows>
+                <OrderLineCount>1</OrderLineCount>
+                <OrderLine>
+                    <ItemCode>200088</ItemCode>
+                    <OrderQuantity>100</OrderQuantity>
+                    <RequestDispatchDate>20210924</RequestDispatchDate>
+                </OrderLine>
+            </OrderRows>
+        </Recommended_orders>

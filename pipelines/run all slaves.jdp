@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('RDP') {
+            steps {
+                build(job: 'System5/RDP', parameters: [[$class: 'StringParameterValue', name: 'login', value: "poca" ]])
+                build(job: 'System5/RDP', parameters: [[$class: 'StringParameterValue', name: 'login', value: "poc1" ]])
+                build(job: 'System5/RDP', parameters: [[$class: 'StringParameterValue', name: 'login', value: "poc2" ]])
+                build(job: 'System5/RDP', parameters: [[$class: 'StringParameterValue', name: 'login', value: "poc3" ]])
+                build(job: 'System5/RDP', parameters: [[$class: 'StringParameterValue', name: 'login', value: "poc4" ]])
+				sleep 300
+            }
+        }
+    }
+    post {
+        always {
+            build(job: 'System5/Close RDP', parameters: [[$class: 'StringParameterValue', name: 'login', value: "poca" ]])
+        }
+    }
+}

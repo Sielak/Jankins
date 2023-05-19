@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<testsuite name="ESalesTest-20210924101719" tests="2" time="0.000" failures="0" errors="0">
+	<testcase classname="ESalesTest" name="test_01_create_order" time="0.000"/>
+	<testcase classname="ESalesTest" name="test_02_check_integration" time="0.000"/>
+	<system-out><![CDATA[]]></system-out>
+	<system-err><![CDATA[]]></system-err>
+</testsuite>

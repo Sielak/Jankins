@@ -1,0 +1,25 @@
+// folder, job and stage name must be one string !!!
+//def job_hash = UUID.randomUUID().toString()
+def job_hash = "Dev_06052020"
+// if you change agent you need also change runned job in RDP stage (schtasks)
+//def choosed_agent = "BMA_TestRunner"
+def choosed_agent = "BMA_poca"
+//def choosed_agent = "BMA_dawy"
+def run_folder = "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts"
+pipeline {
+    agent none
+	stages{
+		stage("Tests") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				bat "${run_folder}\\CFT\\1810\\Config\\xarsm.sikuli --args -hash ${job_hash} -extra 200027"
+				bat "${run_folder}\\CFT\\1810\\06_placement_purchase_order\\3422.sikuli --args -hash ${job_hash}"
+				bat "${run_folder}\\CFT\\1810\\06_placement_purchase_order\\3423.sikuli --args -hash ${job_hash} -extra 1190"
+				bat "${run_folder}\\CFT\\1810\\06_placement_purchase_order\\3425.sikuli --args -hash ${job_hash} -extra 1190"
+            }
+        }
+	}
+}
+

@@ -1,0 +1,44 @@
+Status,Date,Requested By,Approved By,HL Unit,Product,Prio,Est Dev (hrs),Est Cost (EUR),Decision,Decision date,Est Deliv Date,Feature ID
+SENT TO PROJECT OFFICE,2018-03-13,Jolanda de Vis,,HL Display France SAS (+ SASU DESIGN),One Jeeves,4.0,24.0,1440.0,ONHOLD,,,
+INVESTIGATION,2018-12-04,Laurence Lakafia,,HL Display France SAS (+ SASU DESIGN),1J,5.0,16.0,960.0,use Jeeves standard functionality   NO,2019-09-01,,
+ON HOLD,2018-08-06,Maja Ostrowska,Lennart Johansson,HL Display Distribution Center Europe sp zoo,1J,5.0,60.0,3600.0,onhold,2019-03-18,March/April,7276 7327 7331
+ON HOLD,2018-11-07,Boguslaw Kuczynski,,HL Display Distribution Center Europe sp zoo,One Jeeves,5.0,124.0,7440.0,PreStudy,,,
+IN PROGRESS,2018-07-08,B.Kuczynski,Lennart Johansson,HL Display Distribution Center Europe sp zoo,One Jeeves,4.0,0.0,0.0,in progress,2019-09-01,2020-12-20 00:00:00,
+ON HOLD,2019-08-16,Pawel Mazurewicz,,HL Display Distribution Center Europe sp zoo,One Jeeves,3.0,20.0,1200.0,onhold,,,
+ON HOLD,2018-06-08,Boguslaw Kuczynski,,HL Display Distribution Center Europe sp zoo,WMS,4.0,,0.0,ONHOLD,,,
+ON HOLD,2018-10-07,Boguslaw Kuczynski,,HL Display Distribution Center Europe sp zoo,One Jeeves,3.0,,0.0,onhold,,,
+ON HOLD,2018-05-21,Pawel Nowak/  Kinga L,Lennart Johansson,HL Display AB - IT,1J,4.0,10.0,600.0,YES,2018-06-29,22/10/2018,7063
+INVESTIGATION,2018-10-15,B.Kuczynski,,HL Display Distribution Center Europe sp zoo,One Jeeves,4.0,40.0,2400.0,investigation,2019-08-14,,
+ON HOLD,2018-07-11,Pawel Nowak,,HL Display AB - IT,One Jeeves,5.0,100.0,6000.0,ONHOLD,,,
+ON HOLD,2018-10-17,B.Kuczynski,,HL Display Distribution Center Europe sp zoo,One Jeeves,4.0,16.0,960.0,ONHOLD,,,
+SENT TO PROJECT OFFICE,2018-05-12,Kamil Saczka,,,,,,0.0,Project Office,,,
+IN PROGRESS,2017-10-04,Birgitta Möllerskog,Lennart Johansson,HL Display Nordic,1J,4.0,12.0,720.0,YES,2018-09-03,2020-11-20 00:00:00,6843 6844 7535
+ON HOLD,2019-01-23,S. Carrivain,Andreas Astgård,HL Display France SAS (+ SASU DESIGN),1J,5.0,24.0,1440.0,onhold,2020-02-13,July/Agust,7509 7510
+ON HOLD,2019-03-14,Maja Ostrowska,,HL Display Distribution Center Europe sp zoo,1J,4.0,20.0,1200.0,onhold,2019-03-18,,
+ON HOLD,2019-03-14,Bartosz Wowra,,HL Display Nordic,1J,5.0,24.0,1440.0,onhold,2019-10-05,,
+ON HOLD,2019-04-29,Kinga Szygula,,,1J,5.0,80.0,4800.0,onhold,2019-10-05,,
+ON HOLD,2019-10-07,Boguslaw Kuczynski,Lennart Johansson,Costs info in comment,1J,5.0,24.0,1440.0,onhold,2020-02-13,,7721
+ON HOLD,2019-09-27,Boguslaw Kuczynski,Lennart Johansson,HL Display Distribution Center Europe sp zoo,1J,5.0,10.0,600.0,onhold,2019-07-10,,
+ON HOLD,2019-10-22,Stephane Carrivain,,HL Display France SAS (+ SASU DESIGN),1J,4.0,8.0,480.0,onhold,2020-07-07,,
+ON HOLD,2019-05-11,Stephane Carrivain,,HL Display France SAS (+ SASU DESIGN),1J,4.0,10.0,600.0,onhold,2020-02-13,,
+IN PROGRESS,2019-12-16,Malgorzata Stasierska,,HL Display Distribution Center Europe sp zoo,1J,5.0,48.0,2880.0,yes,2020-07-07,2020-11-01 00:00:00,8034 8089
+IN PROGRESS,2020-07-01,Maja Ostrowska,Lennart Johansson,HL Display Distribution Center Europe sp zoo,1J,4.0,8.0,480.0,yes,2020-08-19,2020-12-01 00:00:00,8117
+ON HOLD,2020-09-01,Boguslaw Kuczynski,,HL Display Distribution Center Europe sp zoo,1J,5.0,40.0,2400.0,onhold,2020-02-13,,
+ON HOLD,2021-09-01,Boguslaw Kuczynski,,HL Display Distribution Center Europe sp zoo,1J,5.0,20.0,1200.0,onhold,2020-02-13,,
+ON HOLD,2020-01-23,Stephane Carrivain,,HL Display France SAS (+ SASU DESIGN),1J,5.0,16.0,960.0,,2020-02-13,,
+ON HOLD,2020-05-18,Katarzyna Zelwor,Lennart Johansson,HL Display Gliwice Sp z.o.o,QV,4.0,36.0,2160.0,onhold,2020-10-21,,
+INVESTIGATION,2020-11-05,Bartosz Wowra,Lennart Johansson,HL Display Nordic,1J,4.0,16.0,960.0,NO,2020-08-19,,
+INVESTIGATION,2020-03-26,Lennart Bjork,,HL Display Nordic,1J,4.0,32.0,1920.0,investigation,2020-06-18,,
+,,,,,,,,0.0,,,,
+,,,,,,,,0.0,,,,
+,,,,,,,,0.0,,,,
+,,,,,,,,0.0,,,,
+,,,,,,,,0.0,,,,
+IN PROGRESS,2020-09-10,Paweł Nowak,,HL Display Harlow Ltd,NICELABEL,5.0,2.0,120.0,yes,2020-10-21,2020-12-01 00:00:00,7936
+IN PROGRESS,2020-09-10,Paweł Nowak,,HL Display Gliwice Sp z.o.o,NICELABEL,5.0,2.0,120.0,yes,2020-10-21,2020-12-01 00:00:00,7660
+OPEN,2020-09-10,Paweł Nowak,,,NICELABEL,4.0,4.0,240.0,yes,2020-10-21,,8086
+IN PROGRESS,2020-09-10,Paweł Nowak,,,NICELABEL,5.0,8.0,480.0,yes,2020-10-21,2020-12-01 00:00:00,8099
+INVESTIGATION,2020-10-20,Fredrik Fallding,,HL Display Nordic,1J,4.0,16.0,960.0,investigation,2020-10-21,,
+OPEN,2020-10-22,Barbro Johansson,,,NICELABEL,5.0,60.0,3600.0,,,,8183 8184 8185 8186
+OPEN,2020-11-18,Ida Modigh,,HL Display Nordic,1J,4.0,4.0,240.0,,,,
+OPEN,2020-11-18,Fredrik Falldin,,HL Display Nordic,Eazystock,5.0,4.0,240.0,yes,2020-11-19,2021-01-01 00:00:00,

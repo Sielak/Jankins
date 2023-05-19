@@ -1,0 +1,4 @@
+Status,Date,Requested By,Approved By,HL Unit,Product,Prio,Est Dev (hrs),Est Cost (EUR),Decision,Decision date,Est Deliv Date,Feature ID,Description,Justification
+OPEN,2018-09-14,Kinga Lesniewska,Eva Wennborg,,1J/QV,3.0,16,960.0,YES,,2019-12-31,,Income statement report - move from xrb to QV,"move all fin reports to QV - continuation of project started 2 years ago by Marcin Minkina flexiblity - QV gives possiblity to dril down to transaction level,easier export to excel ect  "
+OPEN,2018-09-14,Kinga Lesniewska,Eva Wennborg,,1J/QV,3.0,8,480.0,YES,,2019-12-31,,Opex report - move from xrb to QV,"move all fin reports to QV - continuation of project started 2 years ago by Marcin Minkina flexiblity - QV gives possiblity to dril down to transaction level, easier export to excel ect
+  "

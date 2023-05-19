@@ -1,0 +1,132 @@
+from decimal import Decimal
+import datetime
+
+
+header = {
+    'ftgnr': '17432', 
+    'kundbestnr': 'PL200-CDA1042150', 
+    'kundref2': '', 
+    'OrdLevPlats1': None, 
+    'ordstat': 0, 
+    'salestype': '19', 
+    'kundfraktdeb': '0', 
+    'ordertextkod': None, 
+    'godsmarke1': 'Dok. C', 
+    'godsmarke2': None, 
+    'edit': None, 
+    'prislista': 7, 
+    'q_hl_sendttlinkemail': None, 
+    'lagstalle': '0', 
+    'ordtyp': 1, 
+    'momskod': 0, 
+    'q_salesmarket_code': 'PL', 
+    'q_hl_emailtt': None
+}
+
+rows = [
+    {
+        'artnr': '900000', 
+        'ordantal': Decimal('1.000000'), 
+        'vb_pris': Decimal('25.0000'), 
+        'fsgprisper': 1.0, 
+        'ordradst': 0, 
+        'artnrkund': 'FGXW00002892', 
+        'ordtyp': 1, 
+        'lagstalle': '0', 
+        'q_hl_ord_comefrom': 2, 
+        'momskod': 0, 
+        'altenhetkod': None, 
+        'ordantalaltenh': Decimal('0.000000'), 
+        'bestallas': '0'
+    }, 
+    {
+        'artnr': '700450', 
+        'ordantal': Decimal('200.000000'), 
+        'vb_pris': Decimal('0.3100'), 
+        'fsgprisper': 1.0, 
+        'ordradst': 0, 
+        'artnrkund': 'FG0000000369', 
+        'ordtyp':1, 
+        'lagstalle': '0', 
+        'q_hl_ord_comefrom': 2, 
+        'momskod': 0, 
+        'altenhetkod': None, 
+        'ordantalaltenh': Decimal('0.000000'), 
+        'bestallas': '0'
+    }, 
+    {
+        'artnr': '701018', 
+        'ordantal': Decimal('200.000000'), 
+        'vb_pris': Decimal('1.0000'), 
+        'fsgprisper': 1.0, 
+        'ordradst': 0, 
+        'artnrkund': 'FG0000000368', 
+        'ordtyp': 1, 
+        'lagstalle': '0', 
+        'q_hl_ord_comefrom': 2, 
+        'momskod': 0, 
+        'altenhetkod': None, 
+        'ordantalaltenh': Decimal('0.000000'), 
+        'bestallas': '0'
+    }, 
+    {
+        'artnr': '356822',
+        'ordantal': Decimal('200.000000'), 
+        'vb_pris': Decimal('0.5100'), 
+        'fsgprisper': 1.0, 
+        'ordradst': 0, 
+        'artnrkund': 'FG0000000332', 
+        'ordtyp': 1, 
+        'lagstalle': '0', 
+        'q_hl_ord_comefrom': 2, 
+        'momskod': 0, 
+        'altenhetkod': None, 
+        'ordantalaltenh': Decimal('0.000000'), 
+        'bestallas': '0'
+    }, 
+    {
+        'artnr': '151986', 
+        'ordantal': Decimal('200.000000'), 
+        'vb_pris': Decimal('4.9600'), 
+        'fsgprisper': 1.0, 
+        'ordradst': 0, 
+        'artnrkund': 'FG0000000366', 
+        'ordtyp': 1, 
+        'lagstalle': '0', 
+        'q_hl_ord_comefrom': 2, 
+        'momskod': 0, 
+        'altenhetkod': None, 
+        'ordantalaltenh': Decimal('0.000000'), 
+        'bestallas': '0'
+    }, 
+    {
+        'artnr': '900000', 
+        'ordantal': Decimal('1.000000'), 
+        'vb_pris': Decimal('25.0000'), 
+        'fsgprisper': 1.0, 
+        'ordradst': 0, 
+        'artnrkund': 'FGXW00002892', 
+        'ordtyp': 1, 
+        'lagstalle': '0', 
+        'q_hl_ord_comefrom': 2, 
+        'momskod': 0, 
+        'altenhetkod': None, 
+        'ordantalaltenh': Decimal('0.000000'), 
+        'bestallas': '0'
+    }, 
+    {
+        'artnr': '527859', 
+        'ordantal': Decimal('1.000000'), 
+        'vb_pris': Decimal('80.0000'), 
+        'fsgprisper': 1.0, 
+        'ordradst': 0, 
+        'artnrkund': 'FGXW_527859', 
+        'ordtyp': 1, 
+        'lagstalle': '0', 
+        'q_hl_ord_comefrom': 2, 
+        'momskod': 0, 
+        'altenhetkod': None, 
+        'ordantalaltenh': Decimal('0.000000'), 
+        'bestallas': '0'
+    }
+]

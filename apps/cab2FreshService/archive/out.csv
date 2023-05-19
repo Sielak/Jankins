@@ -1,0 +1,16 @@
+Status,Date,Requested By,Approved By,HL Unit,Product,Prio,Est Dev (hrs),Est Cost (EUR),Decision,Decision date,Est Deliv Date,Feature ID
+ON HOLD,2018-08-08,Kinga Szyguła,,Costs info in comment,OneJeeves,4,40.0,2400,onhold,2019-12-16,,
+ON HOLD,2018-08-27,Stephane Carrivain,,,OneJeeves,4,16.0,960,onhold,2019-12-16,,
+ON HOLD,,Ida Modigh,,,Current Jeeves,3,4.0,240,Discus at Pree Study SDL,,,
+ON HOLD,2018-07-10,Agnieszka Dudek ,,,OneJeeves,4,24.0,1440,onhold,,,
+IN PROGRESS,2018-12-04,Elena Zhang,Benno Eliasson,HL Display AB - Finance,CJ,5,24.0,1440,YES,2019-08-27,2021-02-20 00:00:00,7625
+IN PROGRESS,2018-10-17,Stephen Mepsted,Lennart Johansson,HL Display Harlow Ltd,1J,4,54.0,3240,yes,2020-09-23,2021-01-01 00:00:00,
+ON HOLD,2019-06-09,Katarzyna Zelwor,,HL Display Gliwice Sp z.o.o,1J,5,16.0,960,onhold,2019-12-16,,
+IN PROGRESS,2020-01-22,Patryk Baczek,Lennart Johansson,HL Display Gliwice Sp z.o.o,1J,4,16.0,960,YES,2020-05-20,2020-11-20 00:00:00,7999
+,,,,,,,,0,,,,
+INVESTIGATION,2020-02-17,Mateusz Nicota,,HL Display Gliwice Sp z.o.o,1J,4,16.0,960,investigaation,2020-03-16,,
+IN PROGRESS,2020-06-03,Stephen Mepsted,Lennart Johansson,HL Display Harlow Ltd,1J,5,16.0,960,yes,2020-03-16,2020-10-01 00:00:00,7952
+IN PROGRESS,2020-12-03,Patryk Baczek,Lennart Johansson,HL Display Gliwice Sp z.o.o,1J,5,44.0,2640,YES,2020-05-20,2020-11-01 00:00:00,7998 8139
+INVESTIGATION,2020-08-13,Katarzyna Zelwor,,HL Display Gliwice Sp z.o.o,LOCAL APP,4,,0,investigation,2020-09-23,,
+IN PROGRESS,2020-03-09,Hakan Tjernberg,Lennart Johansson,HL Display Sundsvall AB,ERP2 SDL,5,28.0,1680,yes,2020-09-23,nov/dec,8134
+IN PROGRESS,2020-10-09,Katarzyna Zelwor,Lennart Johansson,HL Display Gliwice Sp z.o.o,1J,4,6.0,360,yes,2020-09-23,nov/dec,8133

@@ -1,0 +1,15 @@
+{
+    "client_id": "e5f7e1d5-232d-4368-994c-9c23e2457c20",
+    "crm_base_url": "https://hldisplaysandbox.crm4.dynamics.com",
+    "crm_base_url_prod": "https://hldisplay.crm4.dynamics.com",
+    "crm_password": "Sv4rt.0nyx!0451",
+    "crm_username": "S-CRMBG@hl-display.com",
+    "env_prod": "ErpJvs001",
+    "env_test": "ErpTst005",
+    "srv_prod": "EW1-SQL-113",
+    "srv_test": "EW1-SQL-716",
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Imwzc1EtNTBjQ0g0eEJWWkxIVEd3blNSNzY4MCIsImtpZCI6Imwzc1EtNTBjQ0g0eEJWWkxIVEd3blNSNzY4MCJ9.eyJhdWQiOiJodHRwczovL2hsZGlzcGxheS5jcm00LmR5bmFtaWNzLmNvbSIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0L2U5YzVjY2Y2LTZkYTktNDM2ZS1hZGJlLTgxMTkzMGJkMGVjOS8iLCJpYXQiOjE2MzI0NzA1OTYsIm5iZiI6MTYzMjQ3MDU5NiwiZXhwIjoxNjMyNDc0NDk2LCJhY3IiOiIxIiwiYWlvIjoiQVNRQTIvOFRBQUFBY01qNXFKRmpzM05ydWRIVHlpMVB5dWZpdVBtR2NBRG53NUhuRFBkSUhNZz0iLCJhbXIiOlsicHdkIl0sImFwcGlkIjoiZTVmN2UxZDUtMjMyZC00MzY4LTk5NGMtOWMyM2UyNDU3YzIwIiwiYXBwaWRhY3IiOiIwIiwiZ2l2ZW5fbmFtZSI6IlMtQ1JNX0JhY2tncm91bmQiLCJpcGFkZHIiOiIxOTIuMTY1LjE3LjEwIiwibmFtZSI6IlMtQ1JNX0JhY2tncm91bmQiLCJvaWQiOiI1ZThjNmQwZi1iNTg4LTRmMmUtOTlkMi0wMzFmMWU4OGVlZWUiLCJvbnByZW1fc2lkIjoiUy0xLTUtMjEtODU0MjQ1Mzk4LTExMjM1NjE5NDUtNzI1MzQ1NTQzLTkwMjgzIiwicHVpZCI6IjEwMDMyMDAwNDNERUI2QUQiLCJyaCI6IjAuQVJBQTlzekY2YWx0YmtPdHZvRVpNTDBPeWRYaDktVXRJMmhEbVV5Y0ktSkZmQ0FRQUhNLiIsInNjcCI6InVzZXJfaW1wZXJzb25hdGlvbiIsInN1YiI6InZhSHdTa1JySHlzbERXZTVyOWF0Zl9NTE1EYlVSTVRYclV1a0FjQ0V5NmMiLCJ0aWQiOiJlOWM1Y2NmNi02ZGE5LTQzNmUtYWRiZS04MTE5MzBiZDBlYzkiLCJ1bmlxdWVfbmFtZSI6IlMtQ1JNQkdAaGwtZGlzcGxheS5jb20iLCJ1cG4iOiJTLUNSTUJHQGhsLWRpc3BsYXkuY29tIiwidXRpIjoiVTNSRFYxd0g4MDZwdUpfal9heG9BQSIsInZlciI6IjEuMCIsIndpZHMiOlsiYjc5ZmJmNGQtM2VmOS00Njg5LTgxNDMtNzZiMTk0ZTg1NTA5Il19.k9hBfXGY8Z15g29AUEiB22CuiNQH2IzcI4UOQfIEP2V0sCybmI7jwl901N-eH3-66tzjGrwjkCajz6I0j8XvnBdw_QFveZOBet8PM683nnwMbHGMiCjZQ3iYKutM9vPojPxbdB4WN9JNtwhCUadtn5YZK_mBwmiZPpgwfs-OCzK_x5HwiMEU4jijL_ZkjTq_6FLfHLWbyb62FbFnkVjbx8rGFzi8_tRQhTMRlQoX5Pv3kDNzJqtr2PiySt8BQr-YibcGlLE-uld-JRj-NfWZJpdDgfcrYwlO3o70-FIrOwmKMLTXI9bKNDeP1GSwGlAULEsT6YyRk_WDtdktF2tF_g",
+    "token_endpoint": "https://login.microsoftonline.com/e9c5ccf6-6da9-436e-adbe-811930bd0ec9/oauth2/token",
+    "url": "https://hldisplaysandbox.crm4.dynamics.com/",
+    "url_prod": "https://hldisplay.crm4.dynamics.com/"
+}

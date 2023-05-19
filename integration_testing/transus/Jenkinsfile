@@ -1,0 +1,44 @@
+//CRON
+//7 9 * * * 
+//7 12 * * * 
+//7 15 * * * 
+pipeline {
+    agent none
+    stages {
+		stage('Run_test') {
+			agent {
+				label "BMA_poca"
+			}
+			steps {
+				echo 'test started'
+				bat "cd C:/jenkins/integration_testing/transus & python transus_integration_test.py"
+			}
+		}
+    }
+    post {
+        failure{
+			node("BMA_poca") {
+			    emailext body: 'Check console output at $BUILD_URL to view the results. <br><br> -------------------------------------------------- <br><pre>${BUILD_LOG, maxLines=100, escapeHtml=false}</pre>', 
+                        to: 'dawid.wybierek@hl-display.com', 
+                        subject: 'Job: $PROJECT_NAME, Build: #$BUILD_NUMBER - Failure!' 
+				bat 'cd C:/jenkins/integration_testing/transus & python notification.py'
+				dir('C:/jenkins/integration_testing/transus') {
+					xunit (
+						thresholds: [ skipped(failureThreshold: '0'), failed(failureThreshold: '0') ],
+						tools: [ JUnit(pattern: '**/test-reports/*.xml', deleteOutputFiles: true) ]
+					)
+				}
+			}
+        }
+        success{
+			node("BMA_poca") {
+				dir('C:/jenkins/integration_testing/transus') {
+					xunit (
+						thresholds: [ skipped(failureThreshold: '0'), failed(failureThreshold: '0') ],
+						tools: [ JUnit(pattern: '**/test-reports/*.xml', deleteOutputFiles: true) ]
+					)
+				}
+			}
+        }
+    }
+ }

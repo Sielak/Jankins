@@ -1,0 +1,5 @@
+test_string = 'Failed picking goods in Jeeves for cost SO row 640:  {999:1296} Issues not allowed for this order row (incorrect status or Order type).  Picked order details   Order No. = 1388781   Order row No. = 640   Subrow No. = 0   Sequence No. = 2021-08-16 10:05:01.5480419/288   Inventory location = 0   Item No. = 900000   Product account = FREI  Price adjustment = TRUE  Order row status = 20    *=*=*=*=*    Trigger = Oru_insert  @@NestLevel = 3  "key" = <%.oru>   <%OrderNr> = 1388781   <%OrdRadNr> = 640   <%OrdRadNrStrPos> = 0   <%DummyUniqueId> = 2021-08-16 10:05:01.5480419/288   <%LagStalle> = 0   <%ArtNr> = 900000   <%ArtProdKonto> = FREI  "@Info" = 10:05:01.550<#>01.550<1>01.550<1>01.550<12>01.550<1>01.550<4>01.550<6>01.550<8>01.550<10>01.550<16>01.550<20>01.550    O = Jeeves_Init_Insert_Oru    *=*=*=*=*    Procedure = Jeeves_Init_Insert_Oru  @@NestLevel = 2  "@PgmId" = Jeeves_Init_Insert_Oru    "@Info" = <%.Oru>; key =   <%DummyUniqueId> = NULL   <%OrderNr> = 1388781   <%OrdRadNr> = 640   <%OrdRadNrStrPos> = 0   <%OrdRestNr> = 0  '
+
+for item in test_string.split("\n"):
+    if "<%OrderNr>" in item:
+        print(item.strip())

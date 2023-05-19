@@ -1,0 +1,132 @@
+// ver 1.000 (2020-11-26)
+// folder, job and stage name must be one string !!!
+def job_hash = UUID.randomUUID().toString()
+// if you change agent you need also change runned job in RDP stage (schtasks)
+def choosed_agent = "BMA_TestRunner"
+def run_folder = "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts"
+pipeline {
+    agent none
+    stages {
+		stage('RDP') {
+			agent {
+				label "112_poca"
+			}
+			steps {
+				//echo "mock for RDP"
+				bat 'schtasks /Run /TN "Jenkins rdp BMA_MTE_TestRunner"'
+				sleep 60
+			}
+			post {
+				success {
+					echo 'RDP was runned'
+				}
+				failure {
+					echo 'Problems with RDP connection'
+				}
+			}
+		}
+		stage("PrepareEnv") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				powershell '(New-Object -ComObject Shell.Application).MinimizeAll()'
+				//echo "mock for prepare env"
+            }
+        }
+		stage("PrepareJeeves") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				withEnv(['JENKINS_NODE_COOKIE=dontkillme']) {
+					bat "C:\\jenkins\\sikuli\\scripts\\system_OpenJeeves3\\dba101.bat"
+					bat "${run_folder}\\SDL\\login.sikuli"
+                }
+            }
+        }
+		stage("Basic_data") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "${run_folder}\\SDL\\13.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("Item_prep") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "${run_folder}\\SDL\\01.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\SDL\\02.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\SDL\\03.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("Sales") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "${run_folder}\\SDL\\04.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\SDL\\05.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\SDL\\06.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\SDL\\14.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\SDL\\07.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("Purchase") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "${run_folder}\\SDL\\11.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\SDL\\12.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\SDL\\15.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("Finance") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "${run_folder}\\SDL\\08.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\SDL\\09.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\SDL\\10.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("Production") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "${run_folder}\\SDL\\17.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\SDL\\16.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+	}
+	post {
+        always {
+			node("${choosed_agent}") {
+				bat "cd C:\\jenkins\\central_test_database\\ & python results2db.py -group sdl -func move -hash ${job_hash}"
+				bat "cd C:\\jenkins\\central_test_database\\ & python notification.py -template sdl -hash ${job_hash}"
+				bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im Jvs32Client.exe'
+			}
+			node("112_poca") {  	
+				bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im mstsc.exe'
+			}
+        }
+    }
+}

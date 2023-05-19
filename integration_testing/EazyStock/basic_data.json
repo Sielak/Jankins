@@ -1,0 +1,20 @@
+{
+    "env_prod": "ErpTst001",
+    "env_test": "ErpTst001",
+    "es_host": "sftp-test.hl-display.com",
+    "es_password": "39L_bsA9",
+    "es_root_path": "//EW1-FIL-101/Public/_LinuxShareFolder/_Tests/EazyStock/output/",
+    "es_username": "hlit2",
+    "filename_params": "Parameters_HL_Display_1600_20210924-2.xml",
+    "filename_po": "Orders_HL_1600_poca_1190_20210924-2.xml",
+    "integration_url": "http://bma-esb-703:8280/services/easystock.CreateOrdersFromFtp",
+    "integration_url_params": "http://bma-esb-703:8280/services/easystock.UpdateItemParamsFromFTP",
+    "test_data_BufferStock": "200.000000",
+    "test_data_Cooq": "100.000000",
+    "test_data_Item": "200088",
+    "test_data_OrderLevel": "300.000000",
+    "test_data_PickClass": "P0",
+    "test_data_RowQty": "100.000000",
+    "test_data_Stocked": "1",
+    "test_data_VauClass": "C2"
+}

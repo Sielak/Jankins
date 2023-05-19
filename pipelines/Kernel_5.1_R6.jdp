@@ -1,0 +1,490 @@
+// ver 1.00 (2020-10-20)
+// folder, job and stage name must be one string !!!
+def job_hash = UUID.randomUUID().toString()
+// if you change agent you need also change runned job in RDP stage (schtasks)
+def choosed_agent = "BMA_TestRunner"
+//def choosed_agent = "BMA_poca"
+//def choosed_agent = "BMA_dawy"
+def run_folder = "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts"
+pipeline {
+    agent none
+    stages {
+		stage('Activate_poca_on_112') {
+			agent {
+				label "master"
+			}
+			steps {
+				echo "mock for activate poca on 112"
+				//bat 'schtasks /Run /TN "Jenkins rdp 112_poca"'
+				//sleep 10
+				//bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im mstsc.exe'
+			}
+			post {
+				success {
+					echo '112 was activated'
+				}
+				failure {
+					echo 'Problems with RDP connection'
+				}
+			}
+		}
+		stage('RDP') {
+			agent {
+				label "112_poca"
+			}
+			steps {
+				echo "mock for RDP"
+				//bat 'schtasks /Run /TN "Jenkins rdp BMA_MTE_poca"'
+				bat 'schtasks /Run /TN "Jenkins rdp BMA_MTE_TestRunner"'
+				sleep 30
+			}
+			post {
+				success {
+					echo 'RDP was runned'
+				}
+				failure {
+					echo 'Problems with RDP connection'
+				}
+			}
+		}
+		stage("PrepareEnv") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				bat "${run_folder}\\CFT\\1810\\Config\\windows_update.sikuli --args -hash ${job_hash}"
+				//echo "mock for prepare env"
+            }
+        }
+		stage("PrepareJeeves") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				withEnv(['JENKINS_NODE_COOKIE=dontkillme']) {
+					bat "C:\\jenkins\\sikuli\\scripts\\system_OpenJeeves3\\test4.bat"
+					bat "${run_folder}\\CFT\\1810\\Config\\jeeves_login.sikuli --args -hash ${job_hash}"
+				    bat "${run_folder}\\system_ChangeCompany.sikuli --args 1810"
+                }
+				//echo "mock for prepare jeeves"
+            }
+        }
+		stage("BasicData") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "${run_folder}\\CFT\\1810\\Config\\ihdl.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\Config\\flag_mo_complete.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\Config\\sy2_item_creation.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\Config\\Copy_factory_item.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\Config\\unbooking_allowed.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\Config\\Picking_capacity.sikuli --args -hash ${job_hash}"
+                }
+            }
+			post {
+				always {
+					bat "${run_folder}\\system_ChangeCompany.sikuli --args 1810"
+				}
+			}
+        }
+		stage("02") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "${run_folder}\\CFT\\1810\\02_create_item_calculate_and_update_pricelist\\3384.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\02_create_item_calculate_and_update_pricelist\\3384_1.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("03") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock for 03 Quote"
+					bat "${run_folder}\\CFT\\1810\\03_quote\\3388.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\03_quote\\3391.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\03_quote\\3389.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\03_quote\\3390.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\03_quote\\3392.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\03_quote\\3393.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\03_quote\\3394.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\03_quote\\3395.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("04") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "${run_folder}\\CFT\\1810\\04_create_customer\\3396.sikuli --args -hash ${job_hash} -extra normal"
+					bat "${run_folder}\\CFT\\1810\\04_create_customer\\3396.sikuli --args -hash ${job_hash} -extra with_payer"
+					bat "${run_folder}\\system_ChangeCompany.sikuli --args 1810"
+					bat "${run_folder}\\CFT\\1810\\04_create_customer\\3397.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\04_create_customer\\3398.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\04_create_customer\\3399.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\04_create_customer\\3400.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\04_create_customer\\3401.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\04_create_customer\\3402.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("05") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock for 05 Order processing"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3404.sikuli --args -hash ${job_hash} -extra normal"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3404.sikuli --args -hash ${job_hash} -extra johan"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3405.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3406.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3407.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3408.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3409.sikuli --args -hash ${job_hash} -extra 3404_johan"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3409.sikuli --args -hash ${job_hash} -extra 3401"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3409.sikuli --args -hash ${job_hash} -extra 3409_1"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3410.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3411.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3412.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3413.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3414.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3415.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3416.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\Config\\xarsm_plus.sikuli --args -hash ${job_hash} -extra 200088"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3417.sikuli --args -hash ${job_hash} -extra 3409"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3417.sikuli --args -hash ${job_hash} -extra 3400"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3417.sikuli --args -hash ${job_hash} -extra 3401"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3417.sikuli --args -hash ${job_hash} -extra 3409_1"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3417.sikuli --args -hash ${job_hash} -extra 3409_2"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3418.sikuli --args -hash ${job_hash} -extra 3417#3409_1"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3418.sikuli --args -hash ${job_hash} -extra 3417#3409"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3419.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\system_ChangeCompany.sikuli --args 1190"
+					bat "${run_folder}\\CFT\\1810\\Config\\xarsm_plus.sikuli --args -hash ${job_hash} -extra 797203"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3420.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\system_ChangeCompany.sikuli --args 1810"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3421_0.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\05_order_processing\\3421.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("06") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "cd C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\Scripts\\ & python cancel_old_ict.py"
+					bat "cd C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\Scripts\\ & python check_qty_on_bins.py -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\Config\\xarsm.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\06_placement_purchase_order\\3422.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\06_placement_purchase_order\\3423.sikuli --args -hash ${job_hash} -extra 1190"
+					bat "${run_folder}\\CFT\\1810\\06_placement_purchase_order\\3425.sikuli --args -hash ${job_hash} -extra 1190"
+					bat "${run_folder}\\system_ChangeCompany.sikuli --args 1810"
+					//bat "${run_folder}\\CFT\\1810\\06_placement_purchase_order\\3423.sikuli --args -hash ${job_hash} -extra 1140"
+					//bat "${run_folder}\\CFT\\1810\\06_placement_purchase_order\\3425.sikuli --args -hash ${job_hash} -extra 1140"
+					bat "${run_folder}\\CFT\\1810\\06_placement_purchase_order\\3424.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\06_placement_purchase_order\\3426.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\06_placement_purchase_order\\3427.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\06_placement_purchase_order\\close_po_ict.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\system_ChangeCompany.sikuli --args 1810"
+                }
+            }
+        }
+		stage("07") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "${run_folder}\\CFT\\1810\\07_orders_confirmed_acknowledgement\\3428.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\07_orders_confirmed_acknowledgement\\3429.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\07_orders_confirmed_acknowledgement\\3430.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\07_orders_confirmed_acknowledgement\\3431.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("08") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock for 08 Booking, Picking and Dispatch"
+					bat "${run_folder}\\CFT\\1810\\08_booking_picking_and_dispatch\\3432.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\08_booking_picking_and_dispatch\\3433_0.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\08_booking_picking_and_dispatch\\3433.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\08_booking_picking_and_dispatch\\3433_1.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\08_booking_picking_and_dispatch\\3434.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\08_booking_picking_and_dispatch\\3435.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\08_booking_picking_and_dispatch\\3436.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\08_booking_picking_and_dispatch\\3437.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\08_booking_picking_and_dispatch\\3438.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\08_booking_picking_and_dispatch\\3439.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("09") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock for group 09"
+					bat "${run_folder}\\CFT\\1810\\09_invoice\\3440.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\09_invoice\\3441.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\09_invoice\\3442.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\09_invoice\\3443.sikuli --args -hash ${job_hash}"
+					//bat "${run_folder}\\CFT\\1810\\09_invoice\\3444.sikuli --args -hash ${job_hash}"
+					//bat "${run_folder}\\CFT\\1810\\09_invoice\\3445.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("10") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock for group 10"
+					bat "${run_folder}\\CFT\\1810\\10_advance_payment\\3446.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\10_advance_payment\\3447.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\10_advance_payment\\3448.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\10_advance_payment\\3449.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\10_advance_payment\\3450.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\10_advance_payment\\3451.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\10_advance_payment\\3452.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\10_advance_payment\\3453.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\10_advance_payment\\3454.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\10_advance_payment\\3446_1.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("11") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock for group 11"
+					bat "${run_folder}\\CFT\\1810\\11_claims\\3455.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\11_claims\\3456.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\11_claims\\3457.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\11_claims\\3458.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\11_claims\\3459.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("12") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock for group 12"
+					bat "${run_folder}\\CFT\\1810\\12_credit_invoicing\\3460.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\12_credit_invoicing\\3461.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\12_credit_invoicing\\3462.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\12_credit_invoicing\\3463.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\12_credit_invoicing\\3464.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\12_credit_invoicing\\3465.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("13") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock for group 13"
+					bat "${run_folder}\\CFT\\1810\\13_incoming_payment_from_customer\\3466.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\13_incoming_payment_from_customer\\3467.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\13_incoming_payment_from_customer\\3468.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\13_incoming_payment_from_customer\\3469.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\13_incoming_payment_from_customer\\3470.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("14") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock for group 14"
+					bat "${run_folder}\\CFT\\1810\\14_reminders\\3471.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\14_reminders\\3472.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("15") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "${run_folder}\\CFT\\1810\\15_supplier_invoice\\3473.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\15_supplier_invoice\\3474.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\15_supplier_invoice\\3475.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\15_supplier_invoice\\3476.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("16") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "C:\\jenkins\\apps\\OBSCommand\\OBSCommand.exe /startrecording"
+					bat "${run_folder}\\CFT\\1810\\16_outgoing_payment_journals\\3477.sikuli --args -hash ${job_hash}"
+                    bat "${run_folder}\\CFT\\1810\\16_outgoing_payment_journals\\3477_1.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\16_outgoing_payment_journals\\3478.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\16_outgoing_payment_journals\\3479.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\16_outgoing_payment_journals\\3480.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\16_outgoing_payment_journals\\3481.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\16_outgoing_payment_journals\\3482.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\16_outgoing_payment_journals\\3483.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\16_outgoing_payment_journals\\3484.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\16_outgoing_payment_journals\\3485.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\16_outgoing_payment_journals\\3486.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\16_outgoing_payment_journals\\3487.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\16_outgoing_payment_journals\\3488.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\16_outgoing_payment_journals\\3489.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\16_outgoing_payment_journals\\3490.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\16_outgoing_payment_journals\\3491.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\16_outgoing_payment_journals\\3492.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\16_outgoing_payment_journals\\3493.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("17") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock 17_general_ledger"
+					bat "C:\\jenkins\\apps\\OBSCommand\\OBSCommand.exe /stoprecording"
+					bat "${run_folder}\\CFT\\1810\\17_general_ledger\\3494.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\17_general_ledger\\3495.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\17_general_ledger\\3496.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\17_general_ledger\\3496_1.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("18") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock 18_fixed_assets"
+					bat "${run_folder}\\CFT\\1810\\18_fixed_assets\\3497.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\18_fixed_assets\\3498.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\18_fixed_assets\\3499.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("19") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock 19_reports"
+					bat "${run_folder}\\CFT\\1810\\19_reports\\3500.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\19_reports\\3501.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\19_reports\\3502.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\19_reports\\3503.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\19_reports\\3504.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\19_reports\\3505.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\19_reports\\3506.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\19_reports\\3507.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\19_reports\\3508.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\19_reports\\3509.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("20") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock 20_added_value"
+					bat 'cd C:\\jenkins\\sikuli\\scripts\\CFT\\1810\\Scripts\\ & python cancel_open_mo.py'
+					bat "${run_folder}\\CFT\\1810\\Config\\xarsm_plus.sikuli --args -hash ${job_hash} -extra 390201"
+					bat "${run_folder}\\CFT\\1810\\20_added_value\\3511.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\20_added_value\\3512.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\20_added_value\\3513.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\20_added_value\\3514.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\20_added_value\\3515.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\20_added_value\\3516.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\20_added_value\\3517.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\20_added_value\\3518.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\20_added_value\\3519.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("21") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock 21_Subcontracting"
+					bat "${run_folder}\\CFT\\1810\\Config\\xarsm_plus.sikuli --args -hash ${job_hash} -extra 857440"
+					bat "${run_folder}\\CFT\\1810\\21_subcontracting\\3520.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\21_subcontracting\\3521.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\21_subcontracting\\3522.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\21_subcontracting\\3523.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\21_subcontracting\\3526.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\21_subcontracting\\3527.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\21_subcontracting\\3528.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\21_subcontracting\\3524.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\21_subcontracting\\3525.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\21_subcontracting\\3529.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\21_subcontracting\\3530.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+		stage("22") {
+			agent {
+				label "${choosed_agent}"
+			}
+            steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					//echo "mock 22_Fright_matrix"
+					// if below test will generate to many NOKS consider creation of 2 orders: 
+					// one for carier johan weiss and second for DPD Poland and pass only those to below tests
+					bat "${run_folder}\\CFT\\1810\\22_fright_matrix\\3531.sikuli --args -hash ${job_hash}"
+					bat "${run_folder}\\CFT\\1810\\22_fright_matrix\\3532.sikuli --args -hash ${job_hash}"
+                }
+            }
+        }
+	}
+	post {
+        always {
+			node("${choosed_agent}") {
+				bat "cd C:\\jenkins\\central_test_database\\ & python results2db.py -group cft -func move -hash ${job_hash}"
+				bat "cd C:\\jenkins\\central_test_database\\ & python notification.py -template cft -hash ${job_hash}"
+				bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im Jvs32Client.exe'
+				bat "C:\\jenkins\\apps\\OBSCommand\\OBSCommand.exe /stoprecording"
+			}
+			node("112_poca") {  	
+				bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im mstsc.exe'
+			}
+        }
+    }
+}

@@ -1,0 +1,217 @@
+def job_hash = UUID.randomUUID().toString()
+def jeeves_env = "test1.lnk"
+def choosed_agent = "BMA_TestRunner"
+//def choosed_agent = "BMA_poca"
+//def choosed_agent = "BMA_dawy"
+pipeline {
+    agent none
+    stages {
+		stage('Activate poca on 112') {
+			agent {
+				label "master"
+			}
+			steps {
+				bat 'schtasks /Run /TN "Jenkins rdp 112_poca"'
+				sleep 10
+				bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im mstsc.exe'
+			}
+			post {
+				success {
+					echo '112 was activated'
+				}
+				failure {
+					echo 'Problems with RDP connection'
+				}
+			}
+		}
+		stage('RDP') {
+			agent {
+				label "112_poca"
+			}
+			steps {
+				//bat 'schtasks /Run /TN "Jenkins rdp BMA_MTE_poca"'
+				bat 'schtasks /Run /TN "Jenkins rdp BMA_MTE_TestRunner"'
+				sleep 30
+			}
+			post {
+				success {
+					echo 'RDP was runned'
+				}
+				failure {
+					echo 'Problems with RDP connection'
+				}
+			}
+		}
+		stage('CO Flow') {
+			agent {
+				label "${choosed_agent}"
+			}
+			steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "C:\\jenkins\\sikuli\\scripts\\system_OpenJeeves3\\test1.bat"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_login.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_ChangeCompany.sikuli --args 1810"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_Xarsm.sikuli --args 200088"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_OpenProgram.sikuli --args order1"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CO_NewOrder.sikuli --args 17124 200088 20"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CO_Olhucorl.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\CO_invoice.sikuli"
+				}				
+			}
+			post {
+				success {
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_take_screen.sikuli --args -hash ${job_hash} -extra CO_FLOW#success"
+					bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im Jvs32Client.exe'
+				}
+				failure {
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_take_screen.sikuli --args -hash ${job_hash} -extra CO_FLOW#failure"
+					bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im Jvs32Client.exe'
+				}
+			}
+		}
+		stage('ICT Flow') {
+			agent {
+				label "${choosed_agent}"
+			}
+			steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "C:\\jenkins\\sikuli\\scripts\\system_OpenJeeves3\\test1.bat"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_login.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_ChangeCompany.sikuli --args 1190"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_Xarsm.sikuli --args 200088"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_ChangeCompany.sikuli --args 1810"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_OpenProgram.sikuli --args po"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\ICT_NewPO.sikuli --args 1190 200088 500"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\ICT_COinFactory.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\ICT_olhucorl.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\ICT_invoice.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\ICT_Beinlev.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_OpenProgram.sikuli --args item"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_check_stock_balance.sikuli"
+				}				
+			}
+			post {
+				success {
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_take_screen.sikuli --args -hash ${job_hash} -extra ICT_FLOW#success"
+					bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im Jvs32Client.exe'
+				}
+				failure {
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_take_screen.sikuli --args -hash ${job_hash} -extra ICT_FLOW#failure"
+					bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im Jvs32Client.exe'
+				}
+			}
+		}
+		stage('Estimator Flow') {
+			agent {
+				label "${choosed_agent}"
+			}
+			steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "C:\\jenkins\\sikuli\\scripts\\system_OpenJeeves3\\test1.bat"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_login.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_ChangeCompany.sikuli --args 1810"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_OpenProgram.sikuli --args e"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\Estimator_NewEstimation.sikuli --args 745050"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\Estimator_ChangeCompany.sikuli --args 1190"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\Estimator_CopyOperationsAndBom.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\Estimator_ChangeCompany.sikuli --args 1810"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\Estimator_QuotationReport.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\Estimator_Ordofh.sikuli"
+				}				
+			}
+			post {
+				success {
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_take_screen.sikuli --args -hash ${job_hash} -extra Estimator_FLOW#success"
+					bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im Jvs32Client.exe'
+				}
+				failure {
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_take_screen.sikuli --args -hash ${job_hash} -extra Estimator_FLOW#failure"
+					bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im Jvs32Client.exe'
+				}
+			}
+		}
+		stage('MO Flow') {
+			agent {
+				label "${choosed_agent}"
+			}
+			steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "C:\\jenkins\\sikuli\\scripts\\system_OpenJeeves3\\test1.bat"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_login.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_ChangeCompany.sikuli --args 1"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_OpenProgram.sikuli --args sy2"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\MO_FlagMOcomplete.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_ChangeCompany.sikuli --args 1190"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_Xarsm.sikuli --args 201313"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_Xarsm.sikuli --args 750133"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_Xarsm.sikuli --args 787303"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_OpenProgram.sikuli --args xti"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\MO_NewMO.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\MO_Mru2.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\MO_Mru3.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\MO_CloseMO.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_OpenProgram.sikuli --args item"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_check_stock_balance.sikuli"
+				}				
+			}
+			post {
+				success {
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_take_screen.sikuli --args -hash ${job_hash} -extra MO_FLOW#success"
+					bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im Jvs32Client.exe'
+				}
+				failure {
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_take_screen.sikuli --args -hash ${job_hash} -extra MO_FLOW#failure"
+					bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im Jvs32Client.exe'
+				}
+			}
+		}
+		stage('Item creation Flow') {
+			agent {
+				label "${choosed_agent}"
+			}
+			steps {
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+					bat "C:\\jenkins\\sikuli\\scripts\\system_OpenJeeves3\\test1.bat"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_login.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_ChangeCompany.sikuli --args 1"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_OpenProgram.sikuli --args sy2"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\ItemCreation_ItemCreationAllowed.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_OpenProgram.sikuli --args item"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\ItemCreation_NewItem.sikuli --args 1190"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\ItemCreation_FillItemOwnerMap.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\ItemCreation_OpenItemInOwnerCompany.sikuli --args 1190" //ownerID must be this same as in New item
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\ItemCreation_AddOperations.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\ItemCreation_AddBom.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\ItemCreation_Calculation.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\ItemCreation_ItemSellable.sikuli"
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\ItemCreation_CompareBasecosts.sikuli --args 1810"
+				}				
+			}
+			post {
+				success {
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_take_screen.sikuli --args -hash ${job_hash} -extra Item_FLOW#success"
+					bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im Jvs32Client.exe'
+				}
+				failure {
+					bat "java -jar C:\\jenkins\\sikuli\\sikulix.jar -r C:\\jenkins\\sikuli\\scripts\\system_take_screen.sikuli --args -hash ${job_hash} -extra Item_FLOW#failure"
+					bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im Jvs32Client.exe'
+				}
+			}
+		}
+		stage('Notification') {
+			agent {
+				label "${choosed_agent}"
+			}
+			steps {
+				bat 'cd C:\\jenkins2html\\jenkins2html2\\utils\\apps\\ & python Jenkins2email.py'			
+			}
+		}
+    }
+    post {
+        always {
+			node("112_poca") {  	
+				bat 'C:\\Windows\\system32\\taskkill.exe /f /fi "USERNAME eq poca" /im mstsc.exe'
+			}
+        }
+    }
+}

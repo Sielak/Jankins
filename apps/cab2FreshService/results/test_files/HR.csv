@@ -1,0 +1,2 @@
+Status,Date,Requested By,Approved By,HL Unit,Product,Prio,Est Dev (hrs),Est Cost (EUR),Decision,Decision date,Est Deliv Date,Feature ID,Description,Justification
+OPEN,2018-11-16,Marika Westrin,Annika Haaker,HL Display AB - HR,TALENTSOFT,,6.0,400,,2019-03-28,,,Talentsoft - Sync end-date for users to AD,"We will be able to remove accounts in a much secure way. Also, we will comply much better with GDPR-regulation. For security this is also an improvement. Ex-employees will not be able to log on to the HL-accounts."

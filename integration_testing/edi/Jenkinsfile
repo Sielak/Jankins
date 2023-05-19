@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Fetch new xml') {
+            steps {
+                build(job: 'EDI regression tests/Fetch new xml', parameters: [[$class: 'StringParameterValue', name: 'integration', value: "${integration}" ], [$class: 'StringParameterValue', name: 'FaktNr', value: "${FaktNr}" ],[$class: 'StringParameterValue', name: 'env', value: "${test_env}" ]])
+            }
+			post {
+				failure {
+					build(job: 'EDI regression tests/Regression test notification', parameters: [[$class: 'StringParameterValue', name: 'job_name', value: "Fetch new xml" ]])
+				}
+			}
+        }
+		stage('Sort XML') {
+            steps {
+				build(job: 'EDI regression tests/Sort XML', parameters: [[$class: 'StringParameterValue', name: 'integration', value: "${integration}" ]])
+            }
+			post {
+				failure {
+					build(job: 'EDI regression tests/Regression test notification', parameters: [[$class: 'StringParameterValue', name: 'job_name', value: "Sort XML" ]])
+				}
+			}
+        }
+		stage('Compare XML') {
+            steps {
+				build(job: 'EDI regression tests/Compare XML', parameters: [[$class: 'StringParameterValue', name: 'integration', value: "${integration}" ]])
+            }
+			post {
+				failure {
+					build(job: 'EDI regression tests/Regression test notification', parameters: [[$class: 'StringParameterValue', name: 'job_name', value: "Compare XML" ]])
+				}
+			}
+        }
+    }
+}

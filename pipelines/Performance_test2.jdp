@@ -1,0 +1,93 @@
+def clean(result_name) {
+   if (result_name == 'SUCCESS') {
+            build job: 'System/Close Jeeves', parameters: [[$class: 'LabelParameterValue', name: 'kaj', label: '112_poc1'],[$class: 'StringParameterValue', name: 'login', value: "poc1" ]]
+        } else {
+            build job: 'Performance/Performance screenshot', parameters: [[$class: 'LabelParameterValue', name: 'kaj', label: '112_poc1']]
+            build job: 'System/Close Jeeves', parameters: [[$class: 'LabelParameterValue', name: 'kaj', label: '112_poc1'],[$class: 'StringParameterValue', name: 'login', value: "poc1" ]]
+        }
+}
+
+stage('One Jeeves') {
+    node('EW1-ADM-112_poc1') {
+        def one_J = build(job: 'Performance/Performance test 2', propagate: false, parameters: [[$class: 'StringParameterValue', name: 'login', value: "none" ],[$class: 'StringParameterValue', name: 'pass', value: "none" ],[$class: 'StringParameterValue', name: 'env', value: "prod.lnk" ]])
+        result = one_J.result
+        clean(result)
+    }
+}
+stage('HL Display AB') {
+    node('EW1-ADM-112_poc1') {
+        def display_ab = build(job: 'Performance/Performance test 2', propagate: false, parameters: [[$class: 'StringParameterValue', name: 'login', value: "sa" ],[$class: 'StringParameterValue', name: 'pass', value: "HL4DBAs0nly002" ],[$class: 'StringParameterValue', name: 'env', value: "ab.lnk" ]])
+        result2 = display_ab.result
+        clean(result2)
+    }
+}
+stage('Hongkong') {
+    node('EW1-ADM-112_poc1') {
+        def Hongkong = build(job: 'Performance/Performance test 2', propagate: false, parameters: [[$class: 'StringParameterValue', name: 'login', value: "sa" ],[$class: 'StringParameterValue', name: 'pass', value: "hldba0065" ],[$class: 'StringParameterValue', name: 'env', value: "hongkong.lnk" ]])
+        result3 = Hongkong.result
+		clean(result3)
+    }
+}
+stage('Jakarta') {
+    node('EW1-ADM-112_poc1') {
+        def Jakarta = build(job: 'Performance/Performance test 2', propagate: false, parameters: [[$class: 'StringParameterValue', name: 'login', value: "sa" ],[$class: 'StringParameterValue', name: 'pass', value: "hldba0065" ],[$class: 'StringParameterValue', name: 'env', value: "jakarta.lnk" ]])
+        result4 = Jakarta.result
+		clean(result4)
+    }
+}
+stage('Korea') {
+    node('EW1-ADM-112_poc1') {
+        def Korea = build(job: 'Performance/Performance test 2', propagate: false, parameters: [[$class: 'StringParameterValue', name: 'login', value: "sa" ],[$class: 'StringParameterValue', name: 'pass', value: "hldba0065" ],[$class: 'StringParameterValue', name: 'env', value: "korea.lnk" ]])
+        result5 = Korea.result
+		clean(result5)
+    }
+}
+stage('Russia') {
+    node('EW1-ADM-112_poc1') {
+        def Russia = build(job: 'Performance/Performance test 2', propagate: false, parameters: [[$class: 'StringParameterValue', name: 'login', value: "sa" ],[$class: 'StringParameterValue', name: 'pass', value: "HL4DBAs0nly004" ],[$class: 'StringParameterValue', name: 'env', value: "russia.lnk" ]])
+        result6 = Russia.result
+		clean(result6)
+    }
+}
+stage('Sundsvall') {
+    node('EW1-ADM-112_poc1') {
+        def Sundsvall = build(job: 'Performance/Performance test 2', propagate: false, parameters: [[$class: 'StringParameterValue', name: 'login', value: "sa" ],[$class: 'StringParameterValue', name: 'pass', value: "HL4DBAs0nly006" ],[$class: 'StringParameterValue', name: 'env', value: "sundsvall.lnk" ]])
+        result7 = Sundsvall.result
+		clean(result7)
+    }
+}
+stage('Thailand') {
+    node('EW1-ADM-112_poc1') {
+        def Thailand = build(job: 'Performance/Performance test 2', propagate: false, parameters: [[$class: 'StringParameterValue', name: 'login', value: "sa" ],[$class: 'StringParameterValue', name: 'pass', value: "hldba0065" ],[$class: 'StringParameterValue', name: 'env', value: "thailand.lnk" ]])
+        result8 = Thailand.result
+		clean(result8)
+    }
+}
+stage('Suzhou') {
+    node('EW1-ADM-112_poc1') {
+        def Suzhou = build(job: 'Performance/Performance test 2', propagate: false, parameters: [[$class: 'StringParameterValue', name: 'login', value: "sa" ],[$class: 'StringParameterValue', name: 'pass', value: "HL0nly4SZV" ],[$class: 'StringParameterValue', name: 'env', value: "suzhou.lnk" ]])
+        result9 = Suzhou.result
+		clean(result9)
+    }
+}
+stage('China') {
+    node('EW1-ADM-112_poc1') {
+        def China = build(job: 'Performance/Performance test 2', propagate: false, parameters: [[$class: 'StringParameterValue', name: 'login', value: "sa" ],[$class: 'StringParameterValue', name: 'pass', value: "HL0nly4SZV" ],[$class: 'StringParameterValue', name: 'env', value: "suzhou.lnk" ]])
+        result10 = China.result
+		clean(result10)
+    }
+}
+stage('results') {
+    node {
+        println result
+        println result2
+        println result3
+		println result4
+		println result5
+		println result6
+		println result7
+		println result8
+		println result9
+		println result10
+    }
+}

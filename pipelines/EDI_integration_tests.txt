@@ -1,0 +1,40 @@
+pipeline {
+    agent {
+        label "BMA_poca"
+	}
+    stages {
+		stage('Tesco') {
+			steps {
+				catchError {
+					bat 'cd C:\\jenkins\\integration_testing\\edi\\ & python fetch_new_xml_tesco.py "2206333" "ErpTst001"'
+					bat 'cd C:\\jenkins\\integration_testing\\edi\\ & python compare_xml_tesco.py "Tesco" "2206244"'
+				}
+			}
+			post {
+				always {
+					bat 'cd C:\\jenkins\\integration_testing\\edi\\ & python integration_test_notification2.py "Tesco"'
+				}
+			}
+        }
+		stage('Tieto_Portal') {
+			steps {
+				catchError {
+					bat 'cd C:\\jenkins\\integration_testing\\edi\\ & python tieto_portal_check.py'
+				}
+			}
+			post {
+				always {
+					bat 'cd C:\\jenkins\\integration_testing\\edi\\ & python integration_test_notification2.py "Tieto_Portal"'
+				}
+			}
+        }
+    }
+    post {
+        failure {
+            echo 'FAIL'
+        }
+		success {
+            echo 'GOOD :)'
+        }
+    }
+}

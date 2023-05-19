@@ -1,0 +1,7 @@
+{
+    "jeeves_env": "ErpTst001",
+    "wso2_endpoint2": "https://esb-endpoint.hl-display.com/order/gep",
+    "wso2_endpoint": "http://10.192.194.12:8281/order/gep",
+    "wso2_username": "hlgep1",
+    "wso2_password": "WinterIsComming$2021"
+}

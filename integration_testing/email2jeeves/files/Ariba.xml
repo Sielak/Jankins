@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE cXML SYSTEM "http://xml.cxml.org/schemas/cXML/1.2.044/cXML.dtd">
+<cXML payloadID="1624377689309.2009592998.000013155@oqlRSTD17/c2i2bhVyQXffGlILE=" timestamp="2021-06-22T09:01:29-07:00" version="1.2.044" xml:lang="en-US"><Header>
+<From>
+
+<Credential
+            domain="NetworkId">
+            
+<Identity>AN01004752289</Identity>                                    
+</Credential>
+
+
+
+<Credential
+            domain="SystemID"><Identity>P2P</Identity></Credential></From>
+<To>
+
+<Credential
+            domain="DUNS">
+            
+<Identity>pl34</Identity>                                    
+</Credential>
+
+
+
+
+
+<Credential
+            domain="internalsupplierid">
+            
+<Identity>pol_pl9691582008</Identity>                                    
+</Credential>
+
+<Credential
+            domain="buyersystemid">
+            
+<Identity>pol_pl9691582008</Identity>                                    
+</Credential>
+
+<Credential
+            domain="NetworkID"><Identity>AN01588749751</Identity></Credential><Correspondent
+                preferredLanguage="pl-PL">
+
+<Contact
+                    role="correspondent">
+<Name
+                    xml:lang="pl">HL Distribution Center Europe sp. z o.o.</Name>
+ 
+
+<PostalAddress
+                        name="domyślnie">
+<Street>al. Jana Nowaka-Jeziorańskiego 1</Street>
+<City>Kleszczów</City>
+<PostalCode>44-164</PostalCode>
+<Country
+                    isoCountryCode="PL">Polska</Country>
+</PostalAddress>
+
+
+<Email
+                    name="work"
+                    preferredLang="pl-PL">pl.edisupport@hl-display.com</Email><Email
+                    name="routing"
+            preferredLang="pl-PL">pl.edisupport@hl-display.com</Email>
+
+
+
+</Contact>
+
+
+
+
+</Correspondent>
+
+
+</To>
+<Sender>
+<Credential domain="AribaNetworkUserId">
+            
+<Identity>sysadmin@ariba.com</Identity>   
+
+</Credential>
+
+<UserAgent>Buyer 14s2</UserAgent>
+</Sender>
+
+</Header>
+<Request deploymentMode="production">
+<OrderRequest>
+<OrderRequestHeader orderVersion="1" orderType="regular" orderID="EP3341592" type="new" orderDate="2021-06-22T08:22:56-07:00">
+
+<Total>
+
+<Money alternateCurrency="" alternateAmount="" currency="PLN">295.00</Money>
+</Total>
+<ShipTo>
+
+<Address isoCountryCode="PL" addressID="POL_STORE_00254-1">
+<Name xml:lang="en">0254_Gdynia Hipermarket</Name>
+
+
+<PostalAddress name="domyślnie">
+<DeliverTo>Anna TISZBEIN</DeliverTo>
+<DeliverTo>0254_Gdynia Hipermarket</DeliverTo>
+<Street>ul.Kazimierza Górskiego 2</Street>
+<City>Gdynia</City>
+<PostalCode>81-304</PostalCode>
+<Country isoCountryCode="PL">Polska</Country>
+</PostalAddress>
+
+
+<Email preferredLang="pl-PL" name="domyślnie">a.tiszbein@auchan.pl</Email>
+</Address>
+
+</ShipTo>
+<BillTo>
+
+<Address isoCountryCode="PL" addressID="POL_AUCHX_00000">
+<Name xml:lang="en">Auchan Polska Sp. z o.o.</Name>
+
+
+<PostalAddress name="domyślnie">
+<Street>ul. Puławska 46</Street>
+<City>Piaseczno</City>
+<PostalCode>05-500</PostalCode>
+<Country isoCountryCode="PL">Polska</Country>
+</PostalAddress>
+
+
+</Address>
+
+</BillTo>
+
+<Comments>
+Comment Type:
+Submit
+Comment Body:
+401190 (F230_401190_MATERIAŁY DLA DEKORACJI)
+MPK 70133
+Proszę o wpisanie nr EP oraz nr sklepu 254 GDYNIA na fakturze
+Comment By:
+Anna TISZBEIN
+Comment Date:
+2021-06-21T00:12:45-07:00
+
+
+
+
+Comment Type: Terms and Conditions
+Body:-
+
+</Comments>
+<Extrinsic name="Global Fiscal Number">PL9691582008</Extrinsic>
+<Extrinsic name="CompanyCode">POLRETAIL</Extrinsic>
+<Extrinsic name="PUName">0254_Górskiego Gdynia (Północ I)</Extrinsic>
+<Extrinsic name="LegalConditions">Auchan Polska Sp. z o.o.\nul. Puławska 46, 05-500 Piaseczno\nNIP: 526-03-09-174\nSąd Rejonowy dla m.st. Warszawy, XIV Wydział Gospodarczy KRS KRS 0000032892\nKapitał Zakładowy: 906.928.900 PLN</Extrinsic>
+<Extrinsic name="InvoicingConditions">Faktury prosimy wysyłać na adres:\nAuchan Polska Sp. z o.o.\nul. Puławska 46 - dział księgowość\n05-500 Piaseczno\n&quot;Ważne. Prosimy nie realizować zamówienia jeżeli jest kierowane do innego dostawcy. W sytuacji zmiany danych wskazany kontakt z zamawiającym&quot;\n&quot;Dostawca jest zobowiązany do umieszczenia na fakturze poprawnego numeru ZAMÓWIENIA EP&quot;</Extrinsic>
+
+
+
+
+
+
+
+
+
+</OrderRequestHeader>
+
+<ItemOut quantity="200" requestedDeliveryDate="2021-06-30T03:30:00-07:00" lineNumber="1">
+<ItemID>
+<SupplierPartID>363023</SupplierPartID>
+</ItemID>
+
+<ItemDetail>
+<UnitPrice>
+
+
+<Money alternateCurrency="" alternateAmount="" currency="PLN">0.53</Money>
+
+
+
+</UnitPrice>
+<Description xml:lang="en">Uchwyt do mocowania etykiet w lodzie, stanowi komplet z DELI STICK-ICE, kolor biały, minimalna wartość zamówienia 500 zł., realizujemy zamówienia w ilościach będących wielokrotnością pełnych opakowań, koszt transportu doliczany w zależnosci od wartości zamówienia: powyżej 2000 zł - transport gratis, zamówienia od 500 - 2000 zl - transport 80 zł.</Description>
+<UnitOfMeasure>EA</UnitOfMeasure>
+
+
+
+<Classification domain="custom">06-04-03-2001</Classification>
+
+
+<ManufacturerPartID>DELI-SHN-W</ManufacturerPartID>
+<ManufacturerName>HL Display</ManufacturerName>
+<URL name="__lr2bb">http://www.hl-display.com/</URL>
+<LeadTime>30</LeadTime>
+<Extrinsic name="Req. Line No.">1</Extrinsic>
+<Extrinsic name="Requester">Anna TISZBEIN / a.tiszbein@auchan.pl / 586666642</Extrinsic>
+<Extrinsic name="PR No.">PR3992646</Extrinsic>
+<Extrinsic name="Rayon">70133</Extrinsic>
+
+<Extrinsic name="QuoteReference"></Extrinsic>
+<Extrinsic name="QuoteLineReference"></Extrinsic>
+
+
+
+</ItemDetail>
+
+
+
+
+
+
+
+
+</ItemOut>
+
+<ItemOut quantity="100" requestedDeliveryDate="2021-06-30T03:30:00-07:00" lineNumber="2">
+<ItemID>
+<SupplierPartID>342736</SupplierPartID>
+</ItemID>
+
+<ItemDetail>
+<UnitPrice>
+
+
+<Money alternateCurrency="" alternateAmount="" currency="PLN">1.09</Money>
+
+
+
+</UnitPrice>
+<Description xml:lang="en">Bagnet do lodu systemu DELI, wysokość 130mm, kolor mleczno-biały, stanowi komplet z uchwytem DELI-SHN-W, minimalna wartość zamówienia 500 zł., realizujemy zamówienia w ilościach będących wielokrotnością pełnych opakowań, koszt transportu doliczany w zależnosci od wartości zamówienia: powyżej 2000 zł - transport gratis, zamówienia od 500 - 2000 zl - transport 80 zł.</Description>
+<UnitOfMeasure>EA</UnitOfMeasure>
+
+
+
+<Classification domain="custom">06-04-03-9996</Classification>
+
+
+<ManufacturerPartID>DELI-STICK-ICE</ManufacturerPartID>
+<ManufacturerName>HL Display</ManufacturerName>
+<URL name="__lr2bb">http://www.hl-display.com/</URL>
+<LeadTime>30</LeadTime>
+<Extrinsic name="AmountBasedReceiving">Yes</Extrinsic>
+<Extrinsic name="Req. Line No.">2</Extrinsic>
+<Extrinsic name="Requester">Anna TISZBEIN / a.tiszbein@auchan.pl / 586666642</Extrinsic>
+<Extrinsic name="PR No.">PR3992646</Extrinsic>
+<Extrinsic name="Rayon">70133</Extrinsic>
+
+<Extrinsic name="QuoteReference"></Extrinsic>
+<Extrinsic name="QuoteLineReference"></Extrinsic>
+
+
+
+</ItemDetail>
+
+
+
+
+
+
+
+
+</ItemOut>
+
+<ItemOut quantity="1" requestedDeliveryDate="2021-06-30T03:30:00-07:00" lineNumber="3">
+<ItemID>
+<SupplierPartID>900000</SupplierPartID>
+</ItemID>
+
+<ItemDetail>
+<UnitPrice>
+
+
+<Money alternateCurrency="" alternateAmount="" currency="PLN">80.00</Money>
+
+
+
+</UnitPrice>
+<Description xml:lang="en">Koszt transportu dla zamówień o wartości od 500 do 2000 PLN</Description>
+<UnitOfMeasure>EA</UnitOfMeasure>
+
+
+
+<Classification domain="custom">06-04-03-2001</Classification>
+
+
+<ManufacturerPartID>Koszt transportu</ManufacturerPartID>
+<ManufacturerName>HL Display</ManufacturerName>
+<URL name="__lr2bb">http://www.hl-display.com/</URL>
+<LeadTime>30</LeadTime>
+<Extrinsic name="Req. Line No.">3</Extrinsic>
+<Extrinsic name="Requester">Anna TISZBEIN / a.tiszbein@auchan.pl / 586666642</Extrinsic>
+<Extrinsic name="PR No.">PR3992646</Extrinsic>
+<Extrinsic name="Rayon">70133</Extrinsic>
+
+<Extrinsic name="QuoteReference"></Extrinsic>
+<Extrinsic name="QuoteLineReference"></Extrinsic>
+
+
+
+</ItemDetail>
+
+
+
+
+
+
+
+
+</ItemOut>
+
+
+</OrderRequest>
+</Request>
+
+</cXML>
